@@ -1,0 +1,151 @@
+#include "simpletools.h"                      // Include simpletools
+#include "adcDCpropab.h"                      // Include adcDCpropab
+#include "servo.h"                            // Include servo
+
+
+int InteractFear(void);                       // Interactive State function for Fear
+int FearState(void);                          // Function for Fear Code
+int Jitter(void);                             // Function to Jitter
+int Lights(void);                             // Function for Lights
+
+int main()                                    // Main function
+{
+  adc_init(21, 20, 19, 18);                   // CS=21, SCL=20, DO=19, DI=18
+
+  while(1)                                    // Loop repeats indefinitely
+  {
+    FearState();
+    AngerState();
+  }  
+}
+ 
+int FearState()
+{
+  while(1)
+  {
+    int button = input(11);                    //Button is pin 11
+    float LDRVoltageValue;      
+    high(7);
+    high(8);
+    high(9);
+    pause(1000);
+    low(7);
+    low(8);
+    low(9);
+                   
+    LDRVoltageValue = adc_volts(0);            // Check A/D 0      
+    print("button = %d\n", button);
+    
+    if (button == 1)
+    {
+      pause(2000);
+      return 0;
+    }
+                  
+    print("LDR Value = %f \n", LDRVoltageValue); // Display LDR voltage value
+    Jitter();                                 // Calling Jitter Function
+    
+    if (LDRVoltageValue < 2.5)                  // Checking to see LDR Value
+    {
+      InteractFear();
+    }
+  }   
+}  
+
+int Jitter(void)
+{
+    servo_speed(14, 100);                      // Move pin 14 motor by speed 100
+    servo_speed(15, -100);                     // Move pin 15 motor by speed -100
+    pause(200);                               // Pause for 0.1 seconds
+    servo_speed(14, -100);                      // Move pin 14 motor by speed 100
+    servo_speed(15, 100);                     // Move pin 15 motor by speed -100
+    pause(200);                               // Pause for 0.1 seconds
+    return 0;
+}  
+
+int LetsGetIt(void)
+{
+  int LightTime = 100;
+  int FrequencyTime = 200;
+  int FrequencyLevel = 500;
+  
+  int count = 0;              // Count value          
+  int x = 100;
+  
+  while(x < 2000)
+  {
+    freqout(1,20,x);
+    x = x + 10;
+  }
+  
+                            
+  while(count < 6)
+  {
+    freqout(1, FrequencyTime, FrequencyLevel);
+    high(26);
+    low(27);
+    pause(LightTime);
+    high(27);
+    low(26);
+    pause(LightTime);
+    count++;
+    LightTime = 75 + LightTime;
+    FrequencyLevel = FrequencyLevel + 100;
+    FrequencyTime = FrequencyTime + 100;
+  }
+  return 0;
+}  
+
+
+int InteractFear()
+{
+  LetsGetIt();
+  
+  //Turning the Robot 180 degrees
+  servo_speed(14, 200);
+  pause(3000);
+  
+  servo_speed(14, 0);                     // Move pin 14 motor by speed 0
+  servo_speed(15, 0);                     // Move pin 15 motor by speed 0
+  pause(4000);                            // Pause for 2 seconds
+  return 0;
+}  
+
+
+void AngerState()
+{
+  while(1)
+  { 
+    int button = input(11);
+    float FlexSensor;
+    FlexSensor = adc_volts(1);                 // Check A/D 1
+    print("button = %d\n", button);
+    
+    if (button == 1)
+    {
+      pause(2000);
+      return 0;
+    }            
+    
+    print("FlexSensor = %f V\n", FlexSensor);     // Display FlexSensor
+    
+    if(FlexSensor > 0.9 || FlexSensor < 0.7)
+    {
+      InteractiveAnger();
+    }      
+    
+    servo_speed(14,0);
+    servo_speed(15,0);
+    
+    pause(100);                               // Wait 1/10 s
+  }
+  return 0;
+}  
+
+void InteractiveAnger()
+{
+  servo_speed(14, 200);
+  servo_speed(15, -200);
+  pause(4000);
+  return 0;
+}
