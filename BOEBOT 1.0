@@ -164,7 +164,7 @@ int InteractFear()
   
   servo_speed(14, 0);                     // Move pin 14 motor by speed 0
   servo_speed(15, 0);                     // Move pin 15 motor by speed 0
-  pause(4000);                            // Pause for 2 seconds
+  pause(2000);                            // Pause for 2 seconds
   return;
 }
 
