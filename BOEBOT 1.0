@@ -168,7 +168,7 @@ int InteractFear()
   return;
 }
 
-void AngerState()
+int AngerState()
 {
   pause(1000);
   while(1)
@@ -193,7 +193,7 @@ void AngerState()
   }
 }  
 
-void InteractiveAnger()
+int InteractiveAnger()
 {
   servo_speed(14, 200);
   servo_speed(15, -200);
