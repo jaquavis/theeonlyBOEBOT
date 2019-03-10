@@ -203,10 +203,6 @@ void InteractiveAnger()
 ///////////***EMOTION***///////////
 
 
-///////////***MUSIC***/////////////
-///////////***MUSIC***/////////////
-
-
 ///////////***MISC***//////////////
 int LetsGetIt()
 {
@@ -259,3 +255,75 @@ int Ping(int trig, int echo)//trig is trigger pin, echo is echo pin
   return pulse_in(echo, 1);//get the pulse duration back on echo pin
 }
 ///////////***MISC***//////////////
+
+
+///////////***MUSIC***/////////////
+int WiiMii() {
+freqout(1,100,210);
+pause(500);
+freqout(1,100,270);
+pause(250);
+freqout(1,100,320);
+pause(500);
+freqout(1,100,270);
+pause(500);
+freqout(1,100,210);
+pause(250);
+freqout(1,100,180);
+pause(125);
+freqout(1,100,180);
+pause(125);
+freqout(1,100,180);
+pause(750);//rest
+freqout(1,250,160);//slur
+freqout(1,100,180);
+pause(125);
+freqout(1,100,210);
+pause(125);
+freqout(1,100,270);
+pause(125);
+freqout(1,100,320);
+pause(500);
+freqout(1,100,270);
+pause(500);
+freqout(1,100,210);
+pause(250);
+//slur
+freqout(1,500,410);
+freqout(1,250,380);
+freqout(1,250,360);
+pause(750);//rest
+freqout(1,100,250);
+pause(500);
+freqout(1,100,320);
+pause(250);
+freqout(1,100,210);
+pause(500);
+freqout(1,100,320);
+pause(500);
+//try to slur
+freqout(1,250,250);
+freqout(1,250,240);
+freqout(1,100,320);
+pause(500);
+freqout(1,100,240);
+pause(250);
+freqout(1,100,210);
+pause(500);
+freqout(1,100,200);
+pause(500);
+freqout(1,100,200);
+pause(125);
+freqout(1,100,200);
+pause(125);
+freqout(1,100,200);
+pause(725);//rest
+freqout(1,100,200);
+pause(125);
+freqout(1,100,200);
+pause(125);
+freqout(1,100,200);
+pause(1000);
+return;
+}
+///////////***MUSIC***/////////////
