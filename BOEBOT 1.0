@@ -17,7 +17,6 @@ int main()
     pause(100);     
     ///////SWITCH////////
     
-    
     ////////PING/////////
     float i = -1;
     i = Ping(12,13);           
@@ -94,8 +93,7 @@ int SadState()
     {
       FearState();
     }
-    ///////SWITCH////////  
-    
+    ///////SWITCH//////// 
     
     ////////PING/////////
     float i = -1;
