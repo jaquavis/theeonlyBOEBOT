@@ -138,16 +138,8 @@ int ScaredState()
     ///////SWITCH////////
     
     float LDRVoltageValue;      
-    high(7);
-    high(8);
-    high(9);
-    pause(1000);
-    low(7);
-    low(8);
-    low(9);
                    
-    LDRVoltageValue = adc_volts(0);            // Check A/D 0      
-    print("button = %d\n", button);
+    LDRVoltageValue = adc_volts(0);            // Check A/D 0
     print("LDR Value = %f \n", LDRVoltageValue); // Display LDR voltage value
     Jitter();                                 // Calling Jitter Function
     
@@ -168,7 +160,7 @@ int InteractScared()
   
   servo_speed(14, 0);                     // Move pin 14 motor by speed 0
   servo_speed(15, 0);                     // Move pin 15 motor by speed 0
-  pause(2000);                            // Pause for 2 seconds
+  pause(4000);                            // Pause for 4 seconds
   return;
 }
 
@@ -209,7 +201,7 @@ int InteractiveAnger()
 
 
 ///////////***MISC***//////////////
-int LetsGetIt()
+int LetsGetIt(void)
 {
   int LightTime = 100;
   int FrequencyTime = 200;
@@ -220,13 +212,14 @@ int LetsGetIt()
   
   while(x < 2000)
   {
-    freqout(1,20,x);
+    freqout(0,20,x);
     x = x + 10;
   }
-                 
+  
+                            
   while(count < 6)
   {
-    freqout(1, FrequencyTime, FrequencyLevel);
+    freqout(0, FrequencyTime, FrequencyLevel);
     high(26);
     low(27);
     pause(LightTime);
@@ -238,17 +231,17 @@ int LetsGetIt()
     FrequencyLevel = FrequencyLevel + 100;
     FrequencyTime = FrequencyTime + 100;
   }
-  return;
+  return 0;
 }  
   
 int Jitter()
 {
   servo_speed(14, 100);                      // Move pin 14 motor by speed 100
   servo_speed(15, -100);                     // Move pin 15 motor by speed -100
-  pause(200);                               // Pause for 0.1 seconds
+  pause(200);                               // Pause for 0.2 seconds
   servo_speed(14, -100);                      // Move pin 14 motor by speed 100
   servo_speed(15, 100);                     // Move pin 15 motor by speed -100
-  pause(200);                               // Pause for 0.1 seconds
+  pause(200);                               // Pause for 0.2 seconds
   return;
 }   
 
