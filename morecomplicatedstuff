@@ -1,29 +1,142 @@
-#include "simpletools.h"                      // Include simpletools
-#include "adcDCpropab.h"                      // Include adcDCpropab
-#include "servo.h"                            // Include servo
+#include "simpletools.h"                      // Include simple tools
+#include "adcDCpropab.h"
+#include "servo.h"
 
-
-int InteractFear(void);                       // Interactive State function for Fear
-int FearState(void);                          // Function for Fear Code
-int Jitter(void);                             // Function to Jitter
-int Lights(void);                             // Function for Lights
-
-int main()                                    // Main function
+int main()
 {
-  adc_init(21, 20, 19, 18);                   // CS=21, SCL=20, DO=19, DI=18
-
-  while(1)                                    // Loop repeats indefinitely
-  {
-    FearState();
-    AngerState();
+  pause(1000);
+  adc_init(21, 20, 19, 18);                   // CS=21, SCL=20, DO=19, DI=18 
+  while(1)
+  { 
+    ///////SWITCH////////
+    int button = input(11);
+    print("button = %d\n", button);
+    if (button == 1)
+    {
+      HappyState();
+    }   
+    pause(100);     
+    ///////SWITCH////////
+    
+    ////////PING/////////
+    float i = -1;
+    i = Ping(12,13);           
+    i = i / 148;                      //divide the ping by 148 to get inches, or by 54 to get centimeters
+    if(i < 10)
+    {
+      servo_speed(14,-200);
+      servo_speed(15,200);
+      pause(100);
+    }  
+    else
+    {
+      servo_speed(14,200);
+      servo_speed(15,-200);
+      pause(100);
+    }  
+    ////////PING/////////
   }  
 }
- 
-int FearState()
+
+
+///////////***EMOTION***///////////
+int HappyState()
 {
+  pause(1000);
   while(1)
   {
-    int button = input(11);                    //Button is pin 11
+    ///////SWITCH////////
+    int button = input(11);
+    print("button = %d\n", button);
+    if (button == 1)
+    {
+      SadState();
+    }
+    ///////SWITCH////////  
+    
+    servo_speed(14,0);
+    servo_speed(15,0);
+    
+    adc_init(21, 20, 19, 18);
+    float v1;
+  
+    v1 = adc_volts(2);                  // Check A/D 1
+    print("%f V\n", v1);                // Display volts
+  
+    if(v1 > 0.5)
+    {
+      InteractHappy();
+    }      
+    pause(100);                        // Wait 1/10 s
+  }     
+}  
+
+int InteractHappy()
+{
+  servo_speed(14,200);
+  servo_speed(15,200);
+  high(26);
+  high(27);
+  pause(2000);
+  low(26);
+  low(27);
+  return;
+}
+
+int SadState()
+{
+  pause(1000);
+  while(1)
+  {
+    ///////SWITCH////////
+    int button = input(11);
+    print("button = %d\n", button);
+    if (button == 1)
+    {
+      ScaredState();
+    }
+    ///////SWITCH//////// 
+    
+    ////////PING/////////
+    float i = -1;
+    i = Ping(12,13);           
+    i = i / 148;                      //divide the ping by 148 to get inches, or by 54 to get centimeters
+    if(i < 10)
+    {
+      InteractSad();
+    }  
+    else
+    {
+      servo_speed(14,200);
+      servo_speed(15,-200);
+      pause(100);
+    }  
+    ////////PING/////////
+  }    
+}  
+
+int InteractSad()
+{
+   servo_speed(14, -200);
+   servo_speed(15, 200);
+   pause(100);
+   return;
+}
+
+int ScaredState()
+{
+  pause(1000);
+  while(1)
+  {
+    ///////SWITCH////////
+    int button = input(11); 
+    print("button = %d\n", button);                   
+    if (button == 1)
+    {
+      AngerState();
+    }
+    ///////SWITCH////////
+    
     float LDRVoltageValue;      
     high(7);
     high(8);
@@ -35,35 +148,68 @@ int FearState()
                    
     LDRVoltageValue = adc_volts(0);            // Check A/D 0      
     print("button = %d\n", button);
-    
-    if (button == 1)
-    {
-      pause(2000);
-      return 0;
-    }
-                  
     print("LDR Value = %f \n", LDRVoltageValue); // Display LDR voltage value
     Jitter();                                 // Calling Jitter Function
     
     if (LDRVoltageValue < 2.5)                  // Checking to see LDR Value
     {
-      InteractFear();
+      InteractScared();
     }
   }   
-}  
+}
 
-int Jitter(void)
+int InteractScared()
 {
-    servo_speed(14, 100);                      // Move pin 14 motor by speed 100
-    servo_speed(15, -100);                     // Move pin 15 motor by speed -100
-    pause(200);                               // Pause for 0.1 seconds
-    servo_speed(14, -100);                      // Move pin 14 motor by speed 100
-    servo_speed(15, 100);                     // Move pin 15 motor by speed -100
-    pause(200);                               // Pause for 0.1 seconds
-    return 0;
+  LetsGetIt();
+  
+  //Turning the Robot 180 degrees
+  servo_speed(14, 200);
+  pause(3000);
+  
+  servo_speed(14, 0);                     // Move pin 14 motor by speed 0
+  servo_speed(15, 0);                     // Move pin 15 motor by speed 0
+  pause(2000);                            // Pause for 2 seconds
+  return;
+}
+
+int AngerState()
+{
+  pause(1000);
+  while(1)
+  { 
+    ///////SWITCH////////
+    int button = input(11);
+    print("button = %d\n", button);
+    if (button == 1)
+    {
+      main();
+    }   
+    ///////SWITCH////////
+    
+    float FlexSensor;
+    FlexSensor = adc_volts(1);                 // Check A/D 1
+    if(FlexSensor > 0.9 || FlexSensor < 0.7)
+    {
+      InteractiveAnger();
+    }      
+    servo_speed(14,0);
+    servo_speed(15,0);
+    pause(100);                               // Wait 1/10 s
+  }
 }  
 
-int LetsGetIt(void)
+int InteractiveAnger()
+{
+  servo_speed(14, 200);
+  servo_speed(15, -200);
+  pause(100);
+  return;
+}  
+///////////***EMOTION***///////////
+
+
+///////////***MISC***//////////////
+int LetsGetIt()
 {
   int LightTime = 100;
   int FrequencyTime = 200;
@@ -77,8 +223,7 @@ int LetsGetIt(void)
     freqout(1,20,x);
     x = x + 10;
   }
-  
-                            
+                 
   while(count < 6)
   {
     freqout(1, FrequencyTime, FrequencyLevel);
@@ -93,59 +238,118 @@ int LetsGetIt(void)
     FrequencyLevel = FrequencyLevel + 100;
     FrequencyTime = FrequencyTime + 100;
   }
-  return 0;
+  return;
 }  
-
-
-int InteractFear()
-{
-  LetsGetIt();
   
-  //Turning the Robot 180 degrees
-  servo_speed(14, 200);
-  pause(3000);
-  
-  servo_speed(14, 0);                     // Move pin 14 motor by speed 0
-  servo_speed(15, 0);                     // Move pin 15 motor by speed 0
-  pause(4000);                            // Pause for 2 seconds
-  return 0;
-}  
-
-
-void AngerState()
+int Jitter()
 {
-  while(1)
-  { 
-    int button = input(11);
-    float FlexSensor;
-    FlexSensor = adc_volts(1);                 // Check A/D 1
-    print("button = %d\n", button);
-    
-    if (button == 1)
-    {
-      pause(2000);
-      return 0;
-    }            
-    
-    print("FlexSensor = %f V\n", FlexSensor);     // Display FlexSensor
-    
-    if(FlexSensor > 0.9 || FlexSensor < 0.7)
-    {
-      InteractiveAnger();
-    }      
-    
-    servo_speed(14,0);
-    servo_speed(15,0);
-    
-    pause(100);                               // Wait 1/10 s
-  }
-  return 0;
-}  
+  servo_speed(14, 100);                      // Move pin 14 motor by speed 100
+  servo_speed(15, -100);                     // Move pin 15 motor by speed -100
+  pause(200);                               // Pause for 0.1 seconds
+  servo_speed(14, -100);                      // Move pin 14 motor by speed 100
+  servo_speed(15, 100);                     // Move pin 15 motor by speed -100
+  pause(200);                               // Pause for 0.1 seconds
+  return;
+}   
 
-void InteractiveAnger()
+int USsensor()
 {
-  servo_speed(14, 200);
-  servo_speed(15, -200);
-  pause(4000);
-  return 0;
+    ////////PING/////////
+    float i = -1;
+    i = Ping(12,13);           
+    i = i / 148;                      //divide the ping by 148 to get inches, or by 54 to get centimeters
+    if(i < 10)
+    {
+       servo_speed(14, -200);
+       servo_speed(15, 200);
+       pause(100);
+    }  
+    else
+    {
+      servo_speed(14,200);
+      servo_speed(15,-200);
+      pause(100);
+    }  
+    ////////PING/////////
+}   
+
+int Ping(int trig, int echo)//trig is trigger pin, echo is echo pin
+{
+  low(trig);//set trig low for start pulse
+  low(echo);//set echo low to be safe
+  pulse_out(trig, 10);//send the minimum 10 ms pulse on trig to start a ping
+  return pulse_in(echo, 1);//get the pulse duration back on echo pin
 }
+///////////***MISC***//////////////
+
+
+///////////***MUSIC***/////////////
+int WiiMii() {
+freqout(1,100,210);
+pause(500);
+freqout(1,100,270);
+pause(250);
+freqout(1,100,320);
+pause(500);
+freqout(1,100,270);
+pause(500);
+freqout(1,100,210);
+pause(250);
+freqout(1,100,180);
+pause(125);
+freqout(1,100,180);
+pause(125);
+freqout(1,100,180);
+pause(750);//rest
+freqout(1,250,160);//slur
+freqout(1,100,180);
+pause(125);
+freqout(1,100,210);
+pause(125);
+freqout(1,100,270);
+pause(125);
+freqout(1,100,320);
+pause(500);
+freqout(1,100,270);
+pause(500);
+freqout(1,100,210);
+pause(250);
+//slur
+freqout(1,500,410);
+freqout(1,250,380);
+freqout(1,250,360);
+pause(750);//rest
+freqout(1,100,250);
+pause(500);
+freqout(1,100,320);
+pause(250);
+freqout(1,100,210);
+pause(500);
+freqout(1,100,320);
+pause(500);
+//try to slur
+freqout(1,250,250);
+freqout(1,250,240);
+freqout(1,100,320);
+pause(500);
+freqout(1,100,240);
+pause(250);
+freqout(1,100,210);
+pause(500);
+freqout(1,100,200);
+pause(500);
+freqout(1,100,200);
+pause(125);
+freqout(1,100,200);
+pause(125);
+freqout(1,100,200);
+pause(725);//rest
+freqout(1,100,200);
+pause(125);
+freqout(1,100,200);
+pause(125);
+freqout(1,100,200);
+pause(1000);
+return;
+}
+///////////***MUSIC***/////////////
