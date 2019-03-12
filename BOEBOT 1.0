@@ -90,7 +90,7 @@ int SadState()
     int button = input(11);
     if (button == 1)
     {
-      FearState();
+      ScaredState();
     }
     ///////SWITCH//////// 
     
@@ -120,7 +120,7 @@ int InteractSad()
    return;
 }
 
-int FearState()
+int ScaredState()
 {
   pause(1000);
   while(1)
@@ -149,12 +149,12 @@ int FearState()
     
     if (LDRVoltageValue < 2.5)                  // Checking to see LDR Value
     {
-      InteractFear();
+      InteractScared();
     }
   }   
 }
 
-int InteractFear()
+int InteractScared()
 {
   LetsGetIt();
   
