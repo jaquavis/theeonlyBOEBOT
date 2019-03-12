@@ -17,24 +17,6 @@ int main()
     }   
     pause(100);     
     ///////SWITCH////////
-    
-    ////////PING/////////
-    float i = -1;
-    i = Ping(12,13);           
-    i = i / 148;                      //divide the ping by 148 to get inches, or by 54 to get centimeters
-    if(i < 10)
-    {
-      servo_speed(14,-200);
-      servo_speed(15,200);
-      pause(100);
-    }  
-    else
-    {
-      servo_speed(14,200);
-      servo_speed(15,-200);
-      pause(100);
-    }  
-    ////////PING/////////
   }  
 }
 
