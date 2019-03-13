@@ -79,30 +79,46 @@ int SadState()
     }
     ///////SWITCH//////// 
     
+    servo_speed(14,0);
+    servo_speed(15,0);
+    
+    adc_init(21, 20, 19, 18);
+    float v1;
+  
+    v1 = adc_volts(2);                  // Check A/D 1
+    print("%f V\n", v1);                // Display volts
+  
+    if(v1 > 0.5)
+    {
+      InteractSad();
+    }      
+    pause(100); 
+  }    
+}  
+
+int InteractSad()
+{
     ////////PING/////////
     float i = -1;
     i = Ping(12,13);           
     i = i / 148;                      //divide the ping by 148 to get inches, or by 54 to get centimeters
     if(i < 10)
     {
-      InteractSad();
-    }  
-    else
-    {
-      servo_speed(14,200);
-      servo_speed(15,-200);
+      //Turning the Robot 180 degrees
+      servo_speed(14, 100);
+      servo_speed(15, 100);
+      pause(1200);
+    
+      servo_speed(14, 0);
+      servo_speed(15, 0);
       pause(100);
+  
+      servo_speed(14, -200);
+      servo_speed(15, 200);
+      pause(4000);
     }  
     ////////PING/////////
-  }    
-}  
-
-int InteractSad()
-{
-   servo_speed(14, -200);
-   servo_speed(15, 200);
-   pause(100);
-   return;
+  return;
 }
 
 int ScaredState()
@@ -233,19 +249,9 @@ int USsensor()
     float i = -1;
     i = Ping(12,13);           
     i = i / 148;                      //divide the ping by 148 to get inches, or by 54 to get centimeters
-    if(i < 10)
-    {
-       servo_speed(14, -200);
-       servo_speed(15, 200);
-       pause(100);
-    }  
-    else
-    {
-      servo_speed(14,200);
-      servo_speed(15,-200);
-      pause(100);
-    }  
     ////////PING/////////
+    
+    return i;
 }   
 
 int Ping(int trig, int echo)//trig is trigger pin, echo is echo pin
