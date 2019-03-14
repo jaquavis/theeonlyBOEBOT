@@ -490,6 +490,7 @@ void lightshowff(){
 int GameOver(){
   int pin0 = 0; //right hand
   int pin6 = 6; //left hand
+  
   ///////RIGHTHAND/////////
   freqout(pin0, QN, C5);
   pause(QN);
@@ -497,9 +498,9 @@ int GameOver(){
   freqout(pin0, QN, G4);
   pause(HN);
   freqout(pin0, HN, E4);
-  freqout(pin0, FN, F4);/*****//// hold this down and play next two sequentially
-  freqout(pin0, FN, B4);/*****////
-  freqout(pin0, FN, A4);/*****////
+  freqout(pin0, HN, A4);
+  freqout(pin0, HN, B4);
+  freqout(pin0, HN, A4);
   ///////RIGHTHAND/////////
   
   ///////LEFTHAND/////////
