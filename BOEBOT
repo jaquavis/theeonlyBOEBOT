@@ -527,7 +527,7 @@ int GameOver(){
   
   
   ///////RIGHTHAND/////////
-  freqout(pin0, HN, F4);/
+  freqout(pin0, HN, F4);
   freqout(pin0, HN, G4S);
   freqout(pin0, HN, A4S);
   freqout(pin0, HN, G4S);
