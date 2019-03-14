@@ -220,6 +220,72 @@ int counter = 0;
   servo_speed(14,0);
   servo_speed(15,0);
 }
+///////////***EMOTION***///////////
+
+
+///////////***MISC***//////////////
+int LetsGetIt(void)
+{
+  int LightTime = 100;
+  int FrequencyTime = 200;
+  int FrequencyLevel = 500;
+  
+  int count = 0;              // Count value          
+  int x = 100;
+  
+  while(x < 2000)
+  {
+    freqout(0,20,x);
+    x = x + 10;
+  }
+  
+                            
+  while(count < 6)
+  {
+    freqout(0, FrequencyTime, FrequencyLevel);
+    high(26);
+    low(27);
+    pause(LightTime);
+    high(27);
+    low(26);
+    pause(LightTime);
+    count++;
+    LightTime = 75 + LightTime;
+    FrequencyLevel = FrequencyLevel + 100;
+    FrequencyTime = FrequencyTime + 100;
+  }
+  return 0;
+}  
+  
+int Jitter()
+{
+  servo_speed(14, 100);                      // Move pin 14 motor by speed 100
+  servo_speed(15, -100);                     // Move pin 15 motor by speed -100
+  pause(200);                               // Pause for 0.2 seconds
+  servo_speed(14, -100);                      // Move pin 14 motor by speed 100
+  servo_speed(15, 100);                     // Move pin 15 motor by speed -100
+  pause(200);                               // Pause for 0.2 seconds
+  return;
+}   
+
+int USsensor()
+{
+    ////////PING/////////
+    float i = -1;
+    i = Ping(12,13);           
+    i = i / 148;                      //divide the ping by 148 to get inches, or by 54 to get centimeters
+    ////////PING/////////
+    
+    return i;
+}   
+
+int Ping(int trig, int echo)//trig is trigger pin, echo is echo pin
+{
+  low(trig);//set trig low for start pulse
+  low(echo);//set echo low to be safe
+  pulse_out(trig, 10);//send the minimum 10 ms pulse on trig to start a ping
+  return pulse_in(echo, 1);//get the pulse duration back on echo pin
+}
 
 float distance_cm(){
   float i = -1;
@@ -288,72 +354,6 @@ void lightshowff(){
    high(27);
    pause(50);
  }  
-}
-///////////***EMOTION***///////////
-
-
-///////////***MISC***//////////////
-int LetsGetIt(void)
-{
-  int LightTime = 100;
-  int FrequencyTime = 200;
-  int FrequencyLevel = 500;
-  
-  int count = 0;              // Count value          
-  int x = 100;
-  
-  while(x < 2000)
-  {
-    freqout(0,20,x);
-    x = x + 10;
-  }
-  
-                            
-  while(count < 6)
-  {
-    freqout(0, FrequencyTime, FrequencyLevel);
-    high(26);
-    low(27);
-    pause(LightTime);
-    high(27);
-    low(26);
-    pause(LightTime);
-    count++;
-    LightTime = 75 + LightTime;
-    FrequencyLevel = FrequencyLevel + 100;
-    FrequencyTime = FrequencyTime + 100;
-  }
-  return 0;
-}  
-  
-int Jitter()
-{
-  servo_speed(14, 100);                      // Move pin 14 motor by speed 100
-  servo_speed(15, -100);                     // Move pin 15 motor by speed -100
-  pause(200);                               // Pause for 0.2 seconds
-  servo_speed(14, -100);                      // Move pin 14 motor by speed 100
-  servo_speed(15, 100);                     // Move pin 15 motor by speed -100
-  pause(200);                               // Pause for 0.2 seconds
-  return;
-}   
-
-int USsensor()
-{
-    ////////PING/////////
-    float i = -1;
-    i = Ping(12,13);           
-    i = i / 148;                      //divide the ping by 148 to get inches, or by 54 to get centimeters
-    ////////PING/////////
-    
-    return i;
-}   
-
-int Ping(int trig, int echo)//trig is trigger pin, echo is echo pin
-{
-  low(trig);//set trig low for start pulse
-  low(echo);//set echo low to be safe
-  pulse_out(trig, 10);//send the minimum 10 ms pulse on trig to start a ping
-  return pulse_in(echo, 1);//get the pulse duration back on echo pin
 }
 ///////////***MISC***//////////////
 
@@ -511,6 +511,7 @@ int GameOver(){
   freqout(pin6, HN, C3);
   freqout(pin6, FN, F3);
   ///////LEFTHAND/////////
+  
   
   
   ///////RIGHTHAND/////////
