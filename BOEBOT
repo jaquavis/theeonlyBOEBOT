@@ -366,8 +366,66 @@ void lightshowff(){
    pause(50);
  }  
 }
-///////////***MISC***//////////////
 
+void righthand1(){
+  int pin0 = 0; //right hand
+  while(1){
+  ///////RIGHTHAND/////////
+  freqout(pin0, QN, C5);
+  pause(QN);
+  pause(QN);
+  freqout(pin0, QN, G4);
+  pause(HN);
+  freqout(pin0, HN, E4);
+  freqout(pin0, HN, A4);
+  freqout(pin0, HN, B4);
+  freqout(pin0, HN, A4);
+  ///////RIGHTHAND/////////
+  }
+}
+
+void lefthand1(){
+  int pin6 = 6; //left hand
+  while(1){
+  ///////LEFTHAND/////////
+  freqout(pin6, QN, G3);
+  pause(QN);
+  pause(QN);
+  freqout(pin6, QN, E3);
+  pause(HN);
+  freqout(pin6, HN, C3);
+  freqout(pin6, FN, F3);
+  ///////LEFTHAND/////////
+  }
+}
+ 
+ void righthand2(){
+ int pin0 = 0; //right hand
+ while(1){
+  ///////RIGHTHAND/////////
+  freqout(pin0, HN, F4);
+  freqout(pin0, HN, G4S);
+  freqout(pin0, HN, A4S);
+  freqout(pin0, HN, G4S);
+  
+  freqout(pin0, HN+FN, G4);
+  freqout(pin0, QN, D4);
+  freqout(pin0, FN, E4);
+  ///////RIGHTHAND/////////
+  }
+}
+
+void lefthand2(){
+int pin6 = 6; //left hand
+while(1){
+  ///////LEFTHAND/////////
+  freqout(pin6, FN+HN, C3S);
+  freqout(pin6, FN+HN, C3);
+  ///////LEFTHAND/////////
+  }
+}
+
+///////////***MISC***//////////////
 
 /* Note lengths */
 #define MEASURE_TIME              2000  /* Time in ms for 1 measure (1 full note) - should be divisible by 16 */
@@ -499,48 +557,19 @@ void lightshowff(){
 
 ///////////***MUSIC***/////////////
 int GameOver(){
-  int pin0 = 0; //right hand
-  int pin6 = 6; //left hand
-  
-  ///////RIGHTHAND/////////
-  freqout(pin0, QN, C5);
-  pause(QN);
-  pause(QN);
-  freqout(pin0, QN, G4);
+  int *lefthand1_cog = cog_run(lefthand1, 128);
+  int *righthand1_cog = cog_run(righthand1, 128);
+  pause(3*FN);
+  cog_end(lefthand1_cog);
   pause(HN);
-  freqout(pin0, HN, E4);
-  freqout(pin0, HN, A4);
-  freqout(pin0, HN, B4);
-  freqout(pin0, HN, A4);
-  ///////RIGHTHAND/////////
+  cog_end(righthand1_cog);
   
-  ///////LEFTHAND/////////
-  freqout(pin6, QN, G3);
-  pause(QN);
-  pause(QN);
-  freqout(pin6, QN, E3);
-  pause(HN);
-  freqout(pin6, HN, C3);
-  freqout(pin6, FN, F3);
-  ///////LEFTHAND/////////
-  
-  
-  
-  ///////RIGHTHAND/////////
-  freqout(pin0, HN, F4);
-  freqout(pin0, HN, G4S);
-  freqout(pin0, HN, A4S);
-  freqout(pin0, HN, G4S);
-  
-  freqout(pin0, HN+FN, G4);
-  freqout(pin0, QN, D4);
-  freqout(pin0, FN, E4);
-  ///////RIGHTHAND/////////
-  
-  ///////LEFTHAND/////////
-  freqout(pin6, FN+HN, C3S);
-  freqout(pin6, FN+HN, C3);
-  ///////LEFTHAND/////////
+  int *lefthand2_cog = cog_run(leftthand2, 128);
+  int *righthand2_cog = cog_run(righthand2, 128);
+  pause(3*FN);
+  cog_end(lefthand2_cog);
+  pause(1.75*FN);
+  cog_end(righthand2_cog);
   return;
 }
 ///////////***MUSIC***/////////////
