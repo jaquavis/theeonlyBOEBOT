@@ -145,11 +145,11 @@ int ScaredState()
     
     float LDRVoltageValue;      
                    
-    LDRVoltageValue = adc_volts(0);            // Check A/D 0
+    LDRVoltageValue = adc_volts(1);            // Check A/D 0
     print("LDR Value = %f \n", LDRVoltageValue); // Display LDR voltage value
     Jitter();                                 // Calling Jitter Function
     
-    if (LDRVoltageValue < 2.5)                  // Checking to see LDR Value
+    if (LDRVoltageValue < 3.1)                  // Checking to see LDR Value
     {
       InteractScared();
     }
