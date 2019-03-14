@@ -189,6 +189,10 @@ void AngerState()
   servo_speed(14,0);
   servo_speed(15,0);
   pause(2000);
+  int *mobamba_cog = cog_run(mobamba, 128);
+  int *mobamba1_cog = cog_run(mobamba1, 128);
+  int *mobamba2_cog = cog_run(mobamba2, 128);
+  int *mobamba3_cog = cog_run(mobamba3, 128);
   int *lightshow_cog = cog_run(lightshow, 128);
   while(1)
   {
@@ -197,6 +201,11 @@ void AngerState()
     if (button == 1)
     {
       print("button = %d\n", button);
+      cog_end(mobamba_cog);
+      cog_end(mobamba1_cog);
+      cog_end(lightshow_cog);
+      cog_end(mobamba2_cog);
+      cog_end(mobamba3_cog);
       return;
     }   
     ///////SWITCH////////
@@ -205,12 +214,24 @@ void AngerState()
     if(flex>1.87 || flex<1.47)
     {
       cog_end(lightshow_cog);
+      cog_end(mobamba_cog);
+      cog_end(mobamba1_cog);
+      cog_end(mobamba2_cog);
+      cog_end(mobamba3_cog);
       InteractAnger();
+      mobamba_cog = cog_run(mobamba, 128);
+      mobamba1_cog = cog_run(mobamba1, 128);
+      mobamba2_cog = cog_run(mobamba2, 128);
+      mobamba3_cog = cog_run(mobamba3, 128);
       lightshow_cog = cog_run(lightshow, 128);
       pause(2000);
     }
   }
   cog_end(lightshow_cog);
+  cog_end(mobamba_cog);
+  cog_end(mobamba1_cog);
+  cog_end(mobamba2_cog);
+  cog_end(mobamba3_cog);
   return;
 }
 
@@ -395,8 +416,6 @@ void lightshowff(){
 ///////////***MISC***//////////////
 
 ///////////***MUSIC***/////////////
-
-
 void GameOver()
 {
   int *game_cog1 = cog_run(game1,128);  
@@ -450,4 +469,359 @@ int game2()
    freqout(pin6, HN, C7);
   }    
 }
+
+void mobamba(){
+  int pin = 6;
+  while(1){
+  //1
+  freqout(pin,EN,G6);
+  freqout(pin,EN,F6);
+  freqout(pin,EN,E6);
+  pause(EN);
+  freqout(pin,EN,D6);
+  pause(EN);
+  freqout(pin,EN,G6);
+  freqout(pin,EN,F6);
+  //2
+  freqout(pin,EN,E6);
+  pause(EN);
+  freqout(pin,EN,D6);
+  pause(EN);
+  freqout(pin,EN,G6);
+  freqout(pin,EN,F6);
+  freqout(pin,QN,E6);
+  //3
+  freqout(pin,EN,G6);
+  freqout(pin,EN,F6);
+  freqout(pin,EN,E6);
+  pause(EN);
+  freqout(pin,EN,D6);
+  pause(EN);
+  freqout(pin,EN,G6);
+  freqout(pin,EN,F6);
+  //4
+  freqout(pin,EN,E6);
+  pause(EN);
+  pause(QN);
+  freqout(pin,EN,G6);
+  freqout(pin,EN,F6);
+  freqout(pin,EN,E6);
+  pause(EN);
+  //5
+  freqout(pin,EN,G6);
+  freqout(pin,EN,F6);
+  freqout(pin,EN,E6);
+  pause(EN);
+  freqout(pin,EN,D6);
+  pause(EN);
+  freqout(pin,EN,G6);
+  freqout(pin,EN,F6);
+  //6
+  freqout(pin,EN,E6);
+  pause(EN);
+  freqout(pin,EN,D6);
+  pause(EN);
+  freqout(pin,EN,G6);
+  freqout(pin,EN,F6);
+  freqout(pin,EN,E6);
+  pause(EN);
+  //7
+  freqout(pin,EN,G6);
+  freqout(pin,EN,F6);
+  freqout(pin,EN,E6);
+  pause(EN);
+  freqout(pin,EN,D6);
+  pause(EN);
+  freqout(pin,EN,G6);
+  freqout(pin,EN,F6);
+  //8
+  freqout(pin,EN,E6);
+  pause(EN);
+  freqout(pin,EN,D6);
+  pause(EN);
+  freqout(pin,EN,G6);
+  freqout(pin,EN,F6);
+  freqout(pin,EN,E6);
+  pause(EN);
+  //9
+  freqout(pin,EN,G6);
+  freqout(pin,EN,F6);
+  freqout(pin,EN,E6);
+  pause(EN);
+  freqout(pin,EN,D6);
+  pause(EN);
+  freqout(pin,EN,G6);
+  freqout(pin,EN,F6);
+  //10
+  freqout(pin,EN,E6);
+  pause(EN);
+  freqout(pin,EN,D6);
+  pause(EN);
+  freqout(pin,EN,G6);
+  freqout(pin,EN,F6);
+  freqout(pin,EN,E6);
+  pause(EN);
+  //11
+  freqout(pin,EN,G6);
+  freqout(pin,EN,F6);
+  freqout(pin,EN,E6);
+  pause(EN);
+  freqout(pin,EN,D6);
+  pause(EN);
+  freqout(pin,EN,G6);
+  freqout(pin,EN,F6);
+  //12
+  freqout(pin,EN,E6);
+  pause(EN);
+  freqout(pin,EN,D6);
+  pause(EN);
+  freqout(pin,EN,G6);
+  freqout(pin,EN,F6);
+  freqout(pin,EN,E6);
+  pause(EN);
+  //13
+  freqout(pin,EN,G6);
+  freqout(pin,EN,F6);
+  freqout(pin,EN,E6);
+  pause(EN);
+  freqout(pin,EN,D6);
+  pause(EN);
+  freqout(pin,EN,G6);
+  freqout(pin,EN,F6);
+  //14
+  freqout(pin,EN,E6);
+  pause(EN);
+  freqout(pin,EN,D6);
+  pause(EN);
+  freqout(pin,EN,G6);
+  freqout(pin,EN,F6);
+  freqout(pin,EN,E6);
+  pause(EN);
+  //15
+  freqout(pin,EN,G6);
+  freqout(pin,EN,F6);
+  freqout(pin,EN,E6);
+  pause(EN);
+  freqout(pin,EN,D6);
+  pause(EN);
+  freqout(pin,EN,G6);
+  freqout(pin,EN,F6);
+  //16
+  freqout(pin,EN,E6);
+  pause(EN);
+  freqout(pin,EN,D6);
+  pause(EN);
+  freqout(pin,EN,G6);
+  freqout(pin,EN,F6);
+  freqout(pin,EN,E6);
+  pause(EN);
+  }  
+}
+
+void mobamba1(){
+  int pin = 0;
+  while(1){
+  pause(3*FN);//123
+  //4
+  pause(HN);
+  pause(QN);
+  freqout(pin,EN,B2);
+  freqout(pin,EN,B2);
+  //5
+  freqout(pin,FN+QN,E3);//6
+  pause(QN);
+  freqout(pin,QN,E3);
+  pause(QN);
+  //7
+  freqout(pin,HN,F3);
+  pause(QN);
+  freqout(pin,QN+QN,B2);//8
+  pause(QN);
+  freqout(pin,EN,B2);
+  pause(EN);
+  freqout(pin,SN,B2);
+  pause(SN);
+  freqout(pin,SN,B2);
+  pause(SN);
+  //9
+  freqout(pin,FN+QN,E3);//10
+  pause(QN+QN);
+  freqout(pin,EN,E3);
+  pause(EN);
+  //11
+  freqout(pin,HN,F3);
+  pause(QN);
+  freqout(pin,QN+EN,B2);//12
+  pause(EN);
+  freqout(pin,SN,B2);
+  pause(SN);
+  freqout(pin,SN,B2);
+  pause(SN);
+  freqout(pin,SN,B2);
+  pause(SN);
+  pause(EN);
+  freqout(pin,SN,B2);
+  pause(SN);
+  freqout(pin,SN,B2);
+  pause(SN);
+  //13
+  freqout(pin,FN+HN,E3);//14
+  pause(QN);
+  freqout(pin,EN,E3);
+  pause(EN);
+  //15
+  freqout(pin,HN,F3);
+  pause(QN);
+  freqout(pin,QN+EN,B2);//16
+  pause(EN);
+  freqout(pin,SN,B2);
+  pause(SN);
+  freqout(pin,SN,B2);
+  pause(SN);
+  freqout(pin,EN,B2);
+  pause(EN);
+  freqout(pin,SN,B2);
+  pause(SN);
+  freqout(pin,SN,B2);
+  pause(SN);
+  }  
+}
+
+void mobamba2(){
+  int pin = 7;
+  while(1){
+    pause(3*FN);//123
+  //4
+  pause(HN);
+  pause(QN);
+  freqout(pin,EN,B2);
+  freqout(pin,EN,B2);
+  //5
+  freqout(pin,FN+QN,E3);//6
+  pause(QN);
+  freqout(pin,QN,E3);
+  pause(QN);
+  //7
+  freqout(pin,HN,F3);
+  pause(QN);
+  freqout(pin,QN+QN,B2);//8
+  pause(QN);
+  freqout(pin,EN,B2);
+  pause(EN);
+  freqout(pin,SN,B2);
+  pause(SN);
+  freqout(pin,SN,B2);
+  pause(SN);
+  //9
+  freqout(pin,FN+QN,E3);//10
+  pause(QN+QN);
+  freqout(pin,EN,E3);
+  pause(EN);
+  //11
+  freqout(pin,HN,F3);
+  pause(QN);
+  freqout(pin,QN+EN,B2);//12
+  pause(EN);
+  freqout(pin,SN,B2);
+  pause(SN);
+  freqout(pin,SN,B2);
+  pause(SN);
+  freqout(pin,SN,B2);
+  pause(SN);
+  pause(EN);
+  freqout(pin,SN,B2);
+  pause(SN);
+  freqout(pin,SN,B2);
+  pause(SN);
+  //13
+  freqout(pin,FN+HN,E3);//14
+  pause(QN);
+  freqout(pin,EN,E3);
+  pause(EN);
+  //15
+  freqout(pin,HN,F3);
+  pause(QN);
+  freqout(pin,QN+EN,B2);//16
+  pause(EN);
+  freqout(pin,SN,B2);
+  pause(SN);
+  freqout(pin,SN,B2);
+  pause(SN);
+  freqout(pin,EN,B2);
+  pause(EN);
+  freqout(pin,SN,B2);
+  pause(SN);
+  freqout(pin,SN,B2);
+  pause(SN);
+  }  
+}
+
+void mobamba3(){
+  int pin = 4;
+  while(1){
+    pause(3*FN);//123
+  //4
+  pause(HN);
+  pause(QN);
+  freqout(pin,EN,B2);
+  freqout(pin,EN,B2);
+  //5
+  freqout(pin,FN+QN,E3);//6
+  pause(QN);
+  freqout(pin,QN,E3);
+  pause(QN);
+  //7
+  freqout(pin,HN,F3);
+  pause(QN);
+  freqout(pin,QN+QN,B2);//8
+  pause(QN);
+  freqout(pin,EN,B2);
+  pause(EN);
+  freqout(pin,SN,B2);
+  pause(SN);
+  freqout(pin,SN,B2);
+  pause(SN);
+  //9
+  freqout(pin,FN+QN,E3);//10
+  pause(QN+QN);
+  freqout(pin,EN,E3);
+  pause(EN);
+  //11
+  freqout(pin,HN,F3);
+  pause(QN);
+  freqout(pin,QN+EN,B2);//12
+  pause(EN);
+  freqout(pin,SN,B2);
+  pause(SN);
+  freqout(pin,SN,B2);
+  pause(SN);
+  freqout(pin,SN,B2);
+  pause(SN);
+  pause(EN);
+  freqout(pin,SN,B2);
+  pause(SN);
+  freqout(pin,SN,B2);
+  pause(SN);
+  //13
+  freqout(pin,FN+HN,E3);//14
+  pause(QN);
+  freqout(pin,EN,E3);
+  pause(EN);
+  //15
+  freqout(pin,HN,F3);
+  pause(QN);
+  freqout(pin,QN+EN,B2);//16
+  pause(EN);
+  freqout(pin,SN,B2);
+  pause(SN);
+  freqout(pin,SN,B2);
+  pause(SN);
+  freqout(pin,EN,B2);
+  pause(EN);
+  freqout(pin,SN,B2);
+  pause(SN);
+  freqout(pin,SN,B2);
+  pause(SN);
+  }  
+}    
 ///////////***MUSIC***/////////////
