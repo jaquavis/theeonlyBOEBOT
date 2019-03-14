@@ -488,46 +488,46 @@ int Ping(int trig, int echo)//trig is trigger pin, echo is echo pin
 
 ///////////***MUSIC***/////////////
 int GameOver(){
-  int pin = 1;
-  
+  int pin0 = 0; //right hand
+  int pin6 = 6; //left hand
   ///////RIGHTHAND/////////
-  freqout(pin, QN, C5, E4);
+  freqout(pin0, QN, C5, E4);
   pause(QN);
   pause(QN);
-  freqout(pin, QN, G4, C4);
+  freqout(pin0, QN, G4, C4);
   pause(HN);
-  freqout(pin, HN, E4, G3);
-  freqout(pin, FN, F4, A4);/*****//// hold this down and play next two sequentially
-  freqout(pin, FN, B4);/*****////
-  freqout(pin, FN, A4);/*****////
+  freqout(pin0, HN, E4, G3);
+  freqout(pin0, FN, F4, A4);/*****//// hold this down and play next two sequentially
+  freqout(pin0, FN, B4);/*****////
+  freqout(pin0, FN, A4);/*****////
   ///////RIGHTHAND/////////
   
   ///////LEFTHAND/////////
-  freqout(pin, QN, G3);
+  freqout(pin6, QN, G3);
   pause(QN);
   pause(QN);
-  freqout(pin, QN, E3);
+  freqout(pin6, QN, E3);
   pause(HN);
-  freqout(pin, HN, C3);
-  freqout(pin, FN, F3);
+  freqout(pin6, HN, C3);
+  freqout(pin6, FN, F3);
   ///////LEFTHAND/////////
   
   
   
   ///////RIGHTHAND/////////
-  freqout(pin, FN+HN, F4);/*****//// play this and next line together
-  freqout(pin, HN, G4S);/*****////
-  freqout(pin, HN, A4S);
-  freqout(pin, HN, G4S);
+  freqout(pin0, FN+HN, F4);/*****//// play this and next line together
+  freqout(pin0, HN, G4S);/*****////
+  freqout(pin0, HN, A4S);
+  freqout(pin0, HN, G4S);
   
-  freqout(pin, HN+FN, G4, E4);
-  freqout(pin, QN, D4);
-  freqout(pin, FN, E4);
+  freqout(pin0, HN+FN, G4, E4);
+  freqout(pin0, QN, D4);
+  freqout(pin0, FN, E4);
   ///////RIGHTHAND/////////
   
   ///////LEFTHAND/////////
-  freqout(pin, FN+HN, C3S);
-  freqout(pin, FN+HN, C3);
+  freqout(pin6, FN+HN, C3S);
+  freqout(pin6, FN+HN, C3);
   ///////LEFTHAND/////////
   return;
 }
