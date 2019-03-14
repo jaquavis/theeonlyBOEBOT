@@ -80,6 +80,7 @@ void SadState()
     float i = -1;
     i = Ping(12,13);           
     i = i / 148;                      //divide the ping by 148 to get inches, or by 54 to get centimeters
+    print("Ping Sad %f\n", i);
     if(i < 10)
     {
       //Turning the Robot 180 degrees
@@ -125,7 +126,7 @@ void InteractSad()
     float i = -1;
     i = Ping(12,13);           
     i = i / 148;                      //divide the ping by 148 to get inches, or by 54 to get centimeters
-    print("%f\n", i);
+    print("Ping Sad %f\n", i);
     if(i < 10)
     {
       //Turning the Robot 180 degrees
