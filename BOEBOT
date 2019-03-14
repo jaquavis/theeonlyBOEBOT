@@ -385,6 +385,7 @@ void GameOver()
   cog_end(game_cog1);
   cog_end(game_cog2);
 }
+
 int game1()
 {
   while(1)
@@ -401,6 +402,14 @@ int game1()
    freqout(pin0,EN,B6);
    freqout(pin0,EN,A6);
    pause(EN);
+   
+   freqout(pin0, QN, F8);/*****//// play this and next line together
+   freqout(pin0, EN, Gs8Ab8);/*****////
+   freqout(pin0, EN, As8Bb8);
+   freqout(pin0, EN, Gs8Ab8);
+   freqout(pin0, HN, G8);
+   freqout(pin0, EN, D8);
+   freqout(pin0, QN, E8);
   }    
 } 
 int game2() 
@@ -417,6 +426,9 @@ int game2()
    pause(EN);
    freqout(pin6,QN,F8);
    pause(QN);
+   
+   freqout(pin6, HN, Cs7Db7);
+   freqout(pin6, HN, C7);
   }    
 }
 ///////////***MUSIC***/////////////
