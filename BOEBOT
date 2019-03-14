@@ -491,13 +491,13 @@ int GameOver(){
   int pin0 = 0; //right hand
   int pin6 = 6; //left hand
   ///////RIGHTHAND/////////
-  freqout(pin0, QN, C5, E4);
+  freqout(pin0, QN, C5, E4);/*****//// need to change to 3 arguments
   pause(QN);
   pause(QN);
-  freqout(pin0, QN, G4, C4);
+  freqout(pin0, QN, G4, C4);/*****//// need to change to 3 arguments
   pause(HN);
   freqout(pin0, HN, E4, G3);
-  freqout(pin0, FN, F4, A4);/*****//// hold this down and play next two sequentially
+  freqout(pin0, FN, F4, A4);/*****//// hold this down and play next two sequentially   /*****//// need to change to 3 arguments
   freqout(pin0, FN, B4);/*****////
   freqout(pin0, FN, A4);/*****////
   ///////RIGHTHAND/////////
@@ -520,7 +520,7 @@ int GameOver(){
   freqout(pin0, HN, A4S);
   freqout(pin0, HN, G4S);
   
-  freqout(pin0, HN+FN, G4, E4);
+  freqout(pin0, HN+FN, G4, E4);/*****//// need to change to 3 arguments
   freqout(pin0, QN, D4);
   freqout(pin0, FN, E4);
   ///////RIGHTHAND/////////
