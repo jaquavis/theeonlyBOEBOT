@@ -268,17 +268,6 @@ int Jitter()
   return;
 }   
 
-int USsensor()
-{
-    ////////PING/////////
-    float i = -1;
-    i = Ping(12,13);           
-    i = i / 148;                      //divide the ping by 148 to get inches, or by 54 to get centimeters
-    ////////PING/////////
-    
-    return i;
-}   
-
 int Ping(int trig, int echo)//trig is trigger pin, echo is echo pin
 {
   low(trig);//set trig low for start pulse
@@ -290,7 +279,7 @@ int Ping(int trig, int echo)//trig is trigger pin, echo is echo pin
 float distance_cm(){
   float i = -1;
   float distancecm;
-  i = ping(12,13);
+  i = Ping(12,13);
   distancecm = i/54;
   print("Distance %f\n", distancecm); //divide the ping by 148 to get inches, or by 54 to get centimeters
   return distancecm;
