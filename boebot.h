@@ -20,6 +20,10 @@ int game1();
 int game2();
 int game3();
 int sadsens();
+void mobamba();
+void mobamba1();
+void mobamba2();
+void mobamba3();
 
 #define MEASURE_TIME           2000  /* Time in ms for 1 measure (1 full note) - should be divisible by 16 */
   #define FULL_NOTE                 MEASURE_TIME
