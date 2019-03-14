@@ -79,8 +79,29 @@ int SadState()
     }
     ///////SWITCH//////// 
     
-    servo_speed(14,0);
-    servo_speed(15,0);
+    ////////PING/////////
+    float i = -1;
+    i = Ping(12,13);           
+    i = i / 148;                      //divide the ping by 148 to get inches, or by 54 to get centimeters
+    if(i < 10)
+    {
+      //Turning the Robot 180 degrees
+      servo_speed(14, 100);
+      servo_speed(15, 100);
+      pause(1200);
+    
+      servo_speed(14, 0);
+      servo_speed(15, 0);
+      pause(100);
+  
+      servo_speed(14, -50);
+      servo_speed(15, 50);
+    }
+    else
+    {
+      servo_speed(14, -50);
+      servo_speed(15, 50);
+    }
     
     adc_init(21, 20, 19, 18);
     float v1;
