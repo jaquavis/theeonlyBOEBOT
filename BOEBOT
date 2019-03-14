@@ -513,7 +513,6 @@ int GameOver(){
   ///////LEFTHAND/////////
   
   
-  
   ///////RIGHTHAND/////////
   freqout(pin0, FN+HN, F4);/*****//// play this and next line together
   freqout(pin0, HN, G4S);/*****////
