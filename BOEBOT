@@ -88,7 +88,7 @@ int SadState()
     v1 = adc_volts(2);                  // Check A/D 1
     print("%f V\n", v1);                // Display volts
   
-    if(v1 > 0.5)
+    if(v1 > 0.2)
     {
       InteractSad();
     }      
@@ -98,6 +98,9 @@ int SadState()
 
 int InteractSad()
 {
+  int count = 0;
+  while(count < 20)
+  {
     ////////PING/////////
     float i = -1;
     i = Ping(12,13);           
@@ -115,9 +118,14 @@ int InteractSad()
   
       servo_speed(14, -200);
       servo_speed(15, 200);
-      pause(4000);
+      pause(2000);
+      
+      GameOver();
     }  
     ////////PING/////////
+    count++;
+  }   
+    
   return;
 }
 
