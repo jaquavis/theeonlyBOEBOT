@@ -110,7 +110,9 @@ void SadState()
   
     if(v1 > 0.05)
     {
+      int *sadsens_cog = cog_run(sadsens, 128);
       InteractSad();
+      cog_end(sadsens);
     }      
     pause(100); 
   }
@@ -120,6 +122,7 @@ void SadState()
 void InteractSad()
 {
   int count = 0;
+  
   while(count < 100)
   {
     ////////PING/////////
@@ -129,19 +132,6 @@ void InteractSad()
     print("Ping Sad %f\n", i);
     if(i < 10)
     {
-      //Turning the Robot 180 degrees
-      servo_speed(14, 100);
-      servo_speed(15, 100);
-      pause(1200);
-    
-      servo_speed(14, 0);
-      servo_speed(15, 0);
-      pause(100);
-  
-      servo_speed(14, -200);
-      servo_speed(15, 200);
-      pause(2000);
-      
       GameOver();
     }  
     ////////PING/////////
@@ -375,9 +365,6 @@ void lightshowff(){
 ///////////***MISC***//////////////
 
 ///////////***MUSIC***/////////////
-int game1();
-int game2();
-
 void GameOver()
 {
   int *game_cog1 = cog_run(game1,128);  
