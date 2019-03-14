@@ -9,15 +9,10 @@ int main()
   adc_init(21, 20, 19, 18);                   // CS=21, SCL=20, DO=19, DI=18 
   while(1)
   { 
-    ///////SWITCH////////
-    int button = input(11);
-    print("button = %d\n", button);
-    if (button == 1)
-    {
       HappyState();
-    }   
-    pause(100);     
-    ///////SWITCH////////
+      SadState();
+      ScaredState();
+      AngerState();
   }
   return 0;
 }
@@ -33,7 +28,7 @@ void HappyState()
     print("button = %d\n", button);
     if (button == 1)
     {
-      SadState();
+      return;
     }
     ///////SWITCH////////  
     
@@ -77,7 +72,7 @@ void SadState()
     print("button = %d\n", button);
     if (button == 1)
     {
-      ScaredState();
+      return;
     }
     ///////SWITCH//////// 
     
@@ -163,7 +158,7 @@ void ScaredState()
     print("button = %d\n", button);                   
     if (button == 1)
     {
-      AngerState();
+      return;
     }
     ///////SWITCH////////
     
@@ -206,7 +201,7 @@ void AngerState()
     if (button == 1)
     {
       print("button = %d\n", button);
-      HappyState();
+      return;
     }   
     ///////SWITCH////////
     float flex = adc_volts(0);
@@ -379,39 +374,6 @@ void lightshowff(){
 
 ///////////***MUSIC***/////////////
 void GameOver(){
-  int pin0 = 0; //right hand
-  int pin6 = 6; //left hand
-  
-  ///////RIGHTHAND/////////
-  freqout(pin0, QN, C5);
-  pause(QN);
-  pause(QN);
-  freqout(pin0, QN, G4);
-  pause(HN);
-  freqout(pin0, HN, E4);
-  freqout(pin0, HN, A4);
-  freqout(pin0, HN, B4);
-  freqout(pin0, HN, A4);
-  freqout(pin0, HN, F4);
-  freqout(pin0, HN, G4S);
-  freqout(pin0, HN, A4S);
-  freqout(pin0, HN, G4S);
-  freqout(pin0, HN+FN, G4);
-  freqout(pin0, QN, D4);
-  freqout(pin0, FN, E4);
-  ///////RIGHTHAND/////////
-  
-  ///////LEFTHAND/////////
-  freqout(pin6, QN, G3);
-  pause(QN);
-  pause(QN);
-  freqout(pin6, QN, E3);
-  pause(HN);
-  freqout(pin6, HN, C3);
-  freqout(pin6, FN, F3);
-  freqout(pin6, FN+HN, C3S);
-  freqout(pin6, FN+HN, C3);
-  ///////LEFTHAND/////////
   return;
 }
 ///////////***MUSIC***/////////////
