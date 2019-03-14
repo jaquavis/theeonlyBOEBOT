@@ -170,7 +170,7 @@ void ScaredState()
     print("LDR Value = %f \n", LDRVoltageValue); // Display LDR voltage value
     Jitter();                                 // Calling Jitter Function
     
-    if (LDRVoltageValue < 3.13)                  // Checking to see LDR Value
+    if (LDRVoltageValue < 3.19)                  // Checking to see LDR Value
     {
       InteractScared();
     }
