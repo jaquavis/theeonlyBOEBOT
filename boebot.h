@@ -18,6 +18,7 @@ int Ping();
 void GameOver();
 int game1();
 int game2();
+int game3();
 int sadsens();
 
 #define MEASURE_TIME           2000  /* Time in ms for 1 measure (1 full note) - should be divisible by 16 */
