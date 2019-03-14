@@ -87,11 +87,9 @@ void SadState()
       servo_speed(14, 100);
       servo_speed(15, 100);
       pause(1200);
-    
       servo_speed(14, 0);
       servo_speed(15, 0);
       pause(100);
-  
       servo_speed(14, -50);
       servo_speed(15, 50);
     }
