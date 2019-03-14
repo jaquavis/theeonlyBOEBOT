@@ -1,0 +1,65 @@
+void GameOver()
+{
+  int *game_cog1 = cog_run(game1,128);  
+  int *game_cog2 = cog_run(game2,128);
+  int *game_cog3 = cog_run(game3,128);  
+  
+  pause(10000);
+  cog_end(game_cog1);
+  cog_end(game_cog2);
+  cog_end(game_cog3);
+
+}
+
+int game1() //RIGHT HAND
+{
+   int pin0 = 0;
+   freqout(pin0,EN,C7);
+   pause(EN);
+   pause(EN);
+   freqout(pin0,EN,G6);
+   pause(EN);
+   freqout(pin0,EN,E6);
+   freqout(pin0,QN,B6);
+   freqout(pin0,QN,A6);
+   
+   freqout(pin0, (FN+HN)/4, F6);/*****//// play this and next line together
+   freqout(pin0, EN, As6Bb6);
+   freqout(pin0, EN, Gs6Ab6);
+   freqout(pin0, (FN+HN)/4, G6);
+   freqout(pin0, EN, D6);
+   freqout(pin0, QN, E6);
+      
+} 
+int game2() //LEFT HAND
+{
+   int pin6 = 6;
+   freqout(pin6,EN,G5);
+   pause(EN);
+   pause(EN);
+   freqout(pin6,EN,E5);
+   pause(EN);
+   freqout(pin6,EN,C5);
+   freqout(pin6,QN,F5);
+   pause(QN);
+   
+   freqout(pin6, QN, Cs5Db5);
+   freqout(pin6, QN, C5); 
+}
+int game3()  //EXTRA RIGHT HAND
+{
+    int pin4 = 4;
+    freqout(pin4,EN,E6);
+    pause(EN);
+    pause(EN);
+    freqout(pin4,EN,C6);
+    pause(EN);
+    freqout(pin4,EN,G5);
+    freqout(pin4,2*QN,F6);
+    
+    freqout(pin4, EN, Gs6Ab6);
+    pause(QN);
+    pause(EN);
+    pause(EN);
+    freqout(pin4, (FN+HN)/4, E4);    
+}  
