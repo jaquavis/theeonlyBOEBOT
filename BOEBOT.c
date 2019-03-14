@@ -41,7 +41,7 @@ void HappyState()
     v1 = adc_volts(2);                  // Check A/D 1
     print("Sound Happy %f V\n", v1);                // Display volts
   
-    if(v1 > 0.5)
+    if(v1 > 0.05)
     {
       InteractHappy();
     }      
@@ -76,6 +76,10 @@ void SadState()
     }
     ///////SWITCH//////// 
     
+    high(3);
+    pause(200);
+    low(3);
+    
     ////////PING/////////
     float i = -1;
     i = Ping(12,13);           
@@ -87,9 +91,11 @@ void SadState()
       servo_speed(14, 100);
       servo_speed(15, 100);
       pause(1200);
+    
       servo_speed(14, 0);
       servo_speed(15, 0);
       pause(100);
+  
       servo_speed(14, -50);
       servo_speed(15, 50);
     }
@@ -108,17 +114,15 @@ void SadState()
   
     if(v1 > 0.05)
     {
-      int *sadsens_cog = cog_run(sadsens, 128);
       InteractSad();
-      cog_end(sadsens);
     }      
     pause(100); 
-  }
-  return;   
+  } 
 }  
 
 void InteractSad()
 {
+  int *sadsens_cog = cog_run(sadsens, 128);
   int count = 0;
   
   while(count < 100)
@@ -135,7 +139,7 @@ void InteractSad()
     ////////PING/////////
     count++;
   }   
-  return;
+  cog_end(sadsens);
 }
 
 void ScaredState()
@@ -158,7 +162,7 @@ void ScaredState()
     print("LDR Value = %f \n", LDRVoltageValue); // Display LDR voltage value
     Jitter();                                 // Calling Jitter Function
     
-    if (LDRVoltageValue < 3.19)                  // Checking to see LDR Value
+    if (LDRVoltageValue < 3.2)                  // Checking to see LDR Value
     {
       InteractScared();
     }
@@ -176,12 +180,14 @@ void InteractScared()
   
   servo_speed(14, 0);                     // Move pin 14 motor by speed 0
   servo_speed(15, 0);                     // Move pin 15 motor by speed 0
-  pause(4000);                            // Pause for 4 seconds
+  pause(1000);                            // Pause for 4 seconds
   return;
 }
 
 void AngerState()
 {
+  servo_speed(14,0);
+  servo_speed(15,0);
   pause(2000);
   int *lightshow_cog = cog_run(lightshow, 128);
   while(1)
@@ -235,7 +241,34 @@ int counter = 0;
 ///////////***EMOTION***///////////
 
 ///////////***MISC***//////////////
-void LetsGetIt(void)
+int sadsens()
+{
+  while(1)
+  {
+    ////////PING/////////
+    float i = -1;
+    i = Ping(12,13);           
+    i = i / 148;                      //divide the ping by 148 to get inches, or by 54 to get centimeters
+    if(i < 10)
+    {
+      //Turning the Robot 180 degrees
+      servo_speed(14, 100);
+      servo_speed(15, 100);
+      pause(1200);
+    
+      servo_speed(14, 0);
+      servo_speed(15, 0);
+      pause(100);
+  
+      servo_speed(14, -200);
+      servo_speed(15, 200);
+      pause(2000);
+    }  
+    ////////PING///////// 
+  }    
+}  
+
+void LetsGetIt()
 {
   int LightTime = 100;
   int FrequencyTime = 200;
@@ -249,7 +282,6 @@ void LetsGetIt(void)
     freqout(0,20,x);
     x = x + 10;
   }
-  
                             
   while(count < 6)
   {
@@ -363,6 +395,8 @@ void lightshowff(){
 ///////////***MISC***//////////////
 
 ///////////***MUSIC***/////////////
+
+
 void GameOver()
 {
   int *game_cog1 = cog_run(game1,128);  
@@ -371,7 +405,6 @@ void GameOver()
   cog_end(game_cog1);
   cog_end(game_cog2);
 }
-
 int game1()
 {
   while(1)
