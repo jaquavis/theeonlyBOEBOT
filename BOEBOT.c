@@ -42,7 +42,7 @@ void HappyState()
     v1 = adc_volts(2);                  // Check A/D 1
     print("Sound Happy %f V\n", v1);                // Display volts
   
-    if(v1 > 0.05)
+    if(v1 > 1.2) //1.2V on batteries, 0.06V on plug
     {
       InteractHappy();
     }      
@@ -81,13 +81,13 @@ void SadState()
     pause(200);
     low(3);
     
-    adc_init(21, 20, 19, 18);
-    float v1;
-  
-    v1 = adc_volts(2);                  // Check A/D 1
-    print("Sound Sad %f V\n", v1);                // Display volts
-  
-    if(v1 > 0.03)
+      //Slow circle
+      servo_speed(14, -50);
+      servo_speed(15, 0);
+          
+    float flex = adc_volts(0);
+    print("Sad Flex = %f V\n", flex);
+    if(flex>1.87 || flex<1.47)
     {
       InteractSad();
     }      
@@ -101,8 +101,13 @@ void InteractSad()
   pause(100);
   int count = 0;
   
-  while(count < 300)
+  while(count < 50)
   {
+    high(3);
+    high(2);
+    pause(100);
+    low(3);
+    low(2);
     ////////PING/////////
     float i = -1;
     i = Ping(12,13);           
@@ -110,7 +115,7 @@ void InteractSad()
     print("Ping Sad %f\n", i);                      //divide the ping by 148 to get inches, or by 54 to get centimeters
     if(i < 10)
     {
-      count = 20;
+      count = 10;
       int *game_cog1 = cog_run(gameover1,128);
       int *game_cog2 = cog_run(gameover2,128);
       int *game_cog3 = cog_run(gameover3,128);  
@@ -130,7 +135,7 @@ void InteractSad()
       
       servo_speed(14, 0);
       servo_speed(15, 0);
-      pause(7000);
+      pause(6300);
       
       cog_end(game_cog1);
       cog_end(game_cog2);
