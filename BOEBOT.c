@@ -22,6 +22,13 @@ int main()
 void HappyState()
 {
   pause(1000);
+  high(1);
+  high(2);
+  high(3);
+  freqout(0, QN, F4);
+  low(1);
+  low(2);
+  low(3);
   while(1)
   {
     ///////SWITCH////////
@@ -66,6 +73,13 @@ void InteractHappy()
 void SadState()
 {
   pause(1000);
+  high(1);
+  high(2);
+  high(3);
+  freqout(0, QN, F4);
+  low(1);
+  low(2);
+  low(3);
   int count = 0;
   while(1)
   {
@@ -85,8 +99,8 @@ void SadState()
     {
       count = 0;
   
-      freqout(0, QNj, G3j); 
-      freqout(0, HNj, B3j); 
+      freqout(0, QNj, B3j); 
+      freqout(0, HNj, G3j); 
     }      
     
       //Slow circle
@@ -107,7 +121,6 @@ void SadState()
 
 void InteractSad()
 {
-  pause(100);
   int count = 0;
   
   while(count < 50)
@@ -144,7 +157,7 @@ void InteractSad()
       
       servo_speed(14, 0);
       servo_speed(15, 0);
-      pause(6300);
+      pause(6000);
       
       cog_end(game_cog1);
       cog_end(game_cog2);
@@ -159,6 +172,13 @@ void InteractSad()
 void ScaredState()
 {
   pause(1000);
+  high(1);
+  high(2);
+  high(3);
+  freqout(0, QN, F4);
+  low(1);
+  low(2);
+  low(3);
   while(1)
   {
     ///////SWITCH////////
@@ -200,9 +220,16 @@ void InteractScared()
 
 void AngerState()
 {
+  pause(1000);
   servo_speed(14,0);
   servo_speed(15,0);
-  pause(2000);
+  high(1);
+  high(2);
+  high(3);
+  freqout(0, QN, F4);
+  low(1);
+  low(2);
+  low(3);
   int *mobamba_cog = cog_run(mobamba, 128);
   int *mobamba1_cog = cog_run(mobamba1, 128);
   int *mobamba2_cog = cog_run(mobamba2, 128);
@@ -224,7 +251,7 @@ void AngerState()
     }   
     ///////SWITCH////////
     float flex = adc_volts(0);
-    print("Flex = %f V\n", flex);
+    print("Mad Flex = %f V\n", flex);
     if(flex>1.87 || flex<1.47)
     {
       cog_end(lightshow_cog);
@@ -411,10 +438,9 @@ int gameover1() //RIGHT HAND
    
    freqout(pin,QNj,C5j);
    pause(QNj);
-   pause(QNj);
    freqout(pin,QNj,G4j);
    
-   pause(HNj);
+   pause(QNj);
    freqout(pin,HNj,E4j);
    
    freqout(pin,HNj,B4j);
@@ -426,9 +452,10 @@ int gameover1() //RIGHT HAND
    freqout(pin, HNj, A4Sj);
    freqout(pin, HNj, G4Sj);
    
-   freqout(pin, FNj+HNj, G4j);
+   freqout(pin, HNj, G4j);
    freqout(pin, QNj, D4j);
-   freqout(pin, FNj, E4j);   
+   freqout(pin, FNj, E4j); 
+  
 } 
 
 int gameover2() //LEFT HAND
@@ -437,10 +464,9 @@ int gameover2() //LEFT HAND
    
    freqout(pin,QNj,G3j);
    pause(QNj);
-   pause(QNj);
    freqout(pin,QNj,E3j);
    
-   pause(HNj);
+   pause(QNj);
    freqout(pin,HNj,C3j);
    
    freqout(pin,FNj,F3j);
@@ -457,10 +483,9 @@ int gameover3()  //EXTRA RIGHT HAND
     
     freqout(pin,QNj,E4j);
     pause(QNj);
-    pause(QNj);
     freqout(pin,QNj,C4j);
     
-    pause(HNj);
+    pause(QNj);
     freqout(pin,HNj,G3j);
     
     freqout(pin,FNj,A4j);
