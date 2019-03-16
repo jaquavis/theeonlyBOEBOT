@@ -1,16 +1,16 @@
 /* Note lengths */
-#define MEASURE_TIME              1000  /* Time in ms for 1 measure (1 full note) - should be divisible by 16 */
-#define FULL_NOTE                 (MEASURE_TIME)
-#define HALF_NOTE                 (MEASURE_TIME / 2)
-#define QUARTER_NOTE              (MEASURE_TIME / 4)
-#define EIGHTH_NOTE               (MEASURE_TIME / 8)
-#define SIXTEENTH_NOTE            (MEASURE_TIME / 16)
+#define MEASURE_TIMEj              1000  /* Time in ms for 1 measure (1 full note) - should be divisible by 16 */
+#define FULL_NOTEj                 (MEASURE_TIMj)
+#define HALF_NOTEj                 (MEASURE_TIMEj / 2)
+#define QUARTER_NOTEj              (MEASURE_TIMEj / 4)
+#define EIGHTH_NOTEj               (MEASURE_TIMEj / 8)
+#define SIXTEENTH_NOTEj            (MEASURE_TIMEj / 16)
 
-#define FNj                        FULL_NOTE
-#define HNj                        HALF_NOTE
-#define QNj                        QUARTER_NOTE
-#define ENj                        EIGHTH_NOTE
-#define SNj                        SIXTEENTH_NOTE
+#define FNj                        FULL_NOTEj
+#define HNj                        HALF_NOTEj
+#define QNj                        QUARTER_NOTEj
+#define ENj                        EIGHTH_NOTEj
+#define SNj                        SIXTEENTH_NOTEj
 
 /* Note length adjustments */
 #define REGULAR_NOTE_ADJUSTMENT   50
