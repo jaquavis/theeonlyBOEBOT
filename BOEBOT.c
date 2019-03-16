@@ -2,6 +2,7 @@
 #include "adcDCpropab.h"
 #include "servo.h"
 #include "boebot.h"
+#include "JustinMN.h"
 
 int main()
 {
@@ -80,13 +81,40 @@ void SadState()
     pause(200);
     low(3);
     
+    adc_init(21, 20, 19, 18);
+    float v1;
+  
+    v1 = adc_volts(2);                  // Check A/D 1
+    print("Sound Sad %f V\n", v1);                // Display volts
+  
+    if(v1 > 0.012)
+    {
+      InteractSad();
+    }      
+    pause(100);                        // Wait 1/10 s
+  } 
+  return;
+}  
+
+void InteractSad()
+{
+  pause(100);
+  int count = 0;
+  
+  while(count < 100)
+  {
     ////////PING/////////
     float i = -1;
     i = Ping(12,13);           
-    i = i / 148;                      //divide the ping by 148 to get inches, or by 54 to get centimeters
-    print("Ping Sad %f\n", i);
+    i = i / 148;
+    print("Ping Sad %f\n", i);                      //divide the ping by 148 to get inches, or by 54 to get centimeters
     if(i < 10)
     {
+      count = 20;
+      int *game_cog1 = cog_run(game1,128);
+      int *game_cog2 = cog_run(game2,128);
+      int *game_cog3 = cog_run(game3,128);  
+  
       //Turning the Robot 180 degrees
       servo_speed(14, 100);
       servo_speed(15, 100);
@@ -96,50 +124,22 @@ void SadState()
       servo_speed(15, 0);
       pause(100);
   
-      servo_speed(14, -50);
-      servo_speed(15, 50);
-    }
-    else
-    {
-      servo_speed(14, -50);
-      servo_speed(15, 50);
-    }
-    ////////PING/////////
-    
-    adc_init(21, 20, 19, 18);
-    float v1;
-  
-    v1 = adc_volts(2);                  // Check A/D 1
-    print("Sound Sad %f V\n", v1);                // Display volts
-  
-    if(v1 > 0.05)
-    {
-      InteractSad();
-    }      
-    pause(100); 
-  } 
-}  
-
-void InteractSad()
-{
-  int *sadsens_cog = cog_run(sadsens, 128);
-  int count = 0;
-  
-  while(count < 100)
-  {
-    ////////PING/////////
-    float i = -1;
-    i = Ping(12,13);           
-    i = i / 148;                      //divide the ping by 148 to get inches, or by 54 to get centimeters
-    print("Ping Sad %f\n", i);
-    if(i < 10)
-    {
-      GameOver();
+      servo_speed(14, -200);
+      servo_speed(15, 200);
+      pause(2000);
+      
+      servo_speed(14, 0);
+      servo_speed(15, 0);
+      pause(100);
+      
+      cog_end(game_cog1);
+      cog_end(game_cog2);
+      cog_end(game_cog3);
     }  
-    ////////PING/////////
+    ////////PING///////// 
     count++;
   }   
-  cog_end(sadsens);
+  return;
 }
 
 void ScaredState()
@@ -261,34 +261,8 @@ int counter = 0;
 }
 ///////////***EMOTION***///////////
 
-///////////***MISC***//////////////
-int sadsens()
-{
-  while(1)
-  {
-    ////////PING/////////
-    float i = -1;
-    i = Ping(12,13);           
-    i = i / 148;                      //divide the ping by 148 to get inches, or by 54 to get centimeters
-    if(i < 10)
-    {
-      //Turning the Robot 180 degrees
-      servo_speed(14, 100);
-      servo_speed(15, 100);
-      pause(1200);
-    
-      servo_speed(14, 0);
-      servo_speed(15, 0);
-      pause(100);
-  
-      servo_speed(14, -200);
-      servo_speed(15, 200);
-      pause(2000);
-    }  
-    ////////PING///////// 
-  }    
-}  
 
+///////////***MISC***//////////////
 void LetsGetIt()
 {
   int LightTime = 100;
@@ -416,59 +390,79 @@ void lightshowff(){
 ///////////***MISC***//////////////
 
 ///////////***MUSIC***/////////////
-void GameOver()
+int gameover1() //RIGHT HAND
 {
-  int *game_cog1 = cog_run(game1,128);  
-  int *game_cog2 = cog_run(game2,128);
-  pause(10000);
-  cog_end(game_cog1);
-  cog_end(game_cog2);
-}
-int game1()
-{
-  while(1)
-  {
-   int pin0 = 0;
-   freqout(pin0,EN,C7);
-   pause(EN);
-   pause(EN);
-   freqout(pin0,EN,G6);
-   pause(EN);
-   freqout(pin0,EN,E6);
-   pause(EN);
-   freqout(pin0,EN,F6);
-   freqout(pin0,EN,B6);
-   freqout(pin0,EN,A6);
-   pause(EN);
+   int pin = 6;
    
-   freqout(pin0, QN, F8);/*****//// play this and next line together
-   freqout(pin0, EN, Gs8Ab8);/*****////
-   freqout(pin0, EN, As8Bb8);
-   freqout(pin0, EN, Gs8Ab8);
-   freqout(pin0, HN, G8);
-   freqout(pin0, EN, D8);
-   freqout(pin0, QN, E8);
-  }    
-} 
-int game2() 
-{
-  while(1)
-  {
-   int pin6=6;
-   freqout(pin6,EN,G8);
-   pause(EN);
-   pause(EN);
-   freqout(pin6,EN,E8);
-   pause(EN);
-   freqout(pin6,EN,C8);
-   pause(EN);
-   freqout(pin6,QN,F8);
+   freqout(pin,QN,C6);
    pause(QN);
+   pause(QN);
+   freqout(pin,QN,G5);
    
-   freqout(pin6, HN, Cs7Db7);
-   freqout(pin6, HN, C7);
-  }    
+   pause(HN);
+   freqout(pin,HN,E5);
+   
+   freqout(pin,HN,B5);
+   freqout(pin,HN,A5);
+   
+   
+   
+   freqout(pin0, FN+HN, F5);/*****//// play this and next line together
+   freqout(pin0, HN, As5Bb5);
+   freqout(pin0, HN, Gs5Ab5);
+   
+   freqout(pin0, FN+HN, G5);
+   freqout(pin0, QN, D5);
+   freqout(pin0, FN, E5);
+   
+      
+} 
+
+int gameover2() //LEFT HAND
+{
+   int pin6 = 6;
+   
+   freqout(pin6,QN,G4);
+   pause(QN);
+   pause(QN);
+   freqout(pin6,QN,E4);
+   
+   pause(HN);
+   freqout(pin6,HN,C4);
+   
+   freqout(pin6,FN,F4);
+
+   /*
+  
+   freqout(pin6, QN, Cs5Db5);
+   freqout(pin6, QN, C5);
+   */
 }
+
+int gameover3()  //EXTRA RIGHT HAND
+{
+    int pin4 = 4;
+    
+    freqout(pin4,QN,E5);
+    pause(QN);
+    pause(QN);
+    freqout(pin4,QN,C5);
+    
+    pause(HN);
+    freqout(pin4,HN,G4);
+    
+    freqout(pin4,FN,A5);
+   
+   
+   
+    pause(FN);
+    freqout(pin4, HN, Gs5Ab5);
+    pause(HN);
+    pause(HN);
+    
+    freqout(pin4, FN+HN, E4);    
+    
+}  
 
 void mobamba(){
   int pin = 6;
