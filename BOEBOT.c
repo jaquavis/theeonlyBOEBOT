@@ -42,7 +42,7 @@ void HappyState()
     v1 = adc_volts(2);                  // Check A/D 1
     print("Sound Happy %f V\n", v1);                // Display volts
   
-    if(v1 > 0.03)
+    if(v1 > 0.05)
     {
       InteractHappy();
     }      
