@@ -42,7 +42,7 @@ void HappyState()
     v1 = adc_volts(2);                  // Check A/D 1
     print("Sound Happy %f V\n", v1);                // Display volts
   
-    if(v1 > 0.05)
+    if(v1 > 0.03)
     {
       InteractHappy();
     }      
@@ -87,7 +87,7 @@ void SadState()
     v1 = adc_volts(2);                  // Check A/D 1
     print("Sound Sad %f V\n", v1);                // Display volts
   
-    if(v1 > 0.012)
+    if(v1 > 0.03)
     {
       InteractSad();
     }      
@@ -101,7 +101,7 @@ void InteractSad()
   pause(100);
   int count = 0;
   
-  while(count < 100)
+  while(count < 300)
   {
     ////////PING/////////
     float i = -1;
@@ -111,9 +111,9 @@ void InteractSad()
     if(i < 10)
     {
       count = 20;
-      int *game_cog1 = cog_run(game1,128);
-      int *game_cog2 = cog_run(game2,128);
-      int *game_cog3 = cog_run(game3,128);  
+      int *game_cog1 = cog_run(gameover1,128);
+      int *game_cog2 = cog_run(gameover2,128);
+      int *game_cog3 = cog_run(gameover3,128);  
   
       //Turning the Robot 180 degrees
       servo_speed(14, 100);
@@ -130,7 +130,7 @@ void InteractSad()
       
       servo_speed(14, 0);
       servo_speed(15, 0);
-      pause(100);
+      pause(7000);
       
       cog_end(game_cog1);
       cog_end(game_cog2);
@@ -162,7 +162,7 @@ void ScaredState()
     print("LDR Value = %f \n", LDRVoltageValue); // Display LDR voltage value
     Jitter();                                 // Calling Jitter Function
     
-    if (LDRVoltageValue < 3.2)                  // Checking to see LDR Value
+    if (LDRVoltageValue < 2.8)                  // Checking to see LDR Value
     {
       InteractScared();
     }
@@ -389,79 +389,76 @@ void lightshowff(){
 }
 ///////////***MISC***//////////////
 
+
 ///////////***MUSIC***/////////////
 int gameover1() //RIGHT HAND
 {
-   int pin = 6;
+   int pin = 0;
    
-   freqout(pin,QN,C6);
-   pause(QN);
-   pause(QN);
-   freqout(pin,QN,G5);
+   freqout(pin,QNj,C5j);
+   pause(QNj);
+   pause(QNj);
+   freqout(pin,QNj,G4j);
    
-   pause(HN);
-   freqout(pin,HN,E5);
+   pause(HNj);
+   freqout(pin,HNj,E4j);
    
-   freqout(pin,HN,B5);
-   freqout(pin,HN,A5);
+   freqout(pin,HNj,B4j);
+   freqout(pin,HNj,A4j);
    
+   //////////
    
+   freqout(pin, FNj+HNj, F4j);
+   freqout(pin, HNj, A4Sj);
+   freqout(pin, HNj, G4Sj);
    
-   freqout(pin0, FN+HN, F5);/*****//// play this and next line together
-   freqout(pin0, HN, As5Bb5);
-   freqout(pin0, HN, Gs5Ab5);
-   
-   freqout(pin0, FN+HN, G5);
-   freqout(pin0, QN, D5);
-   freqout(pin0, FN, E5);
-   
-      
+   freqout(pin, FNj+HNj, G4j);
+   freqout(pin, QNj, D4j);
+   freqout(pin, FNj, E4j);   
 } 
 
 int gameover2() //LEFT HAND
 {
-   int pin6 = 6;
+   int pin = 6;
    
-   freqout(pin6,QN,G4);
-   pause(QN);
-   pause(QN);
-   freqout(pin6,QN,E4);
+   freqout(pin,QNj,G3j);
+   pause(QNj);
+   pause(QNj);
+   freqout(pin,QNj,E3j);
    
-   pause(HN);
-   freqout(pin6,HN,C4);
+   pause(HNj);
+   freqout(pin,HNj,C3j);
    
-   freqout(pin6,FN,F4);
+   freqout(pin,FNj,F3j);
 
-   /*
+   ///////
   
-   freqout(pin6, QN, Cs5Db5);
-   freqout(pin6, QN, C5);
-   */
+   freqout(pin, HNj, C4Sj);
+   freqout(pin, HNj, C4j);
 }
 
 int gameover3()  //EXTRA RIGHT HAND
 {
-    int pin4 = 4;
+    int pin = 7;
     
-    freqout(pin4,QN,E5);
-    pause(QN);
-    pause(QN);
-    freqout(pin4,QN,C5);
+    freqout(pin,QNj,E4j);
+    pause(QNj);
+    pause(QNj);
+    freqout(pin,QNj,C4j);
     
-    pause(HN);
-    freqout(pin4,HN,G4);
+    pause(HNj);
+    freqout(pin,HNj,G3j);
     
-    freqout(pin4,FN,A5);
+    freqout(pin,FNj,A4j);
    
+   /////////
    
-   
-    pause(FN);
-    freqout(pin4, HN, Gs5Ab5);
-    pause(HN);
-    pause(HN);
+    pause(FNj);
+    freqout(pin, HNj, G4Sj);
+    pause(HNj);
+    pause(HNj);
     
-    freqout(pin4, FN+HN, E4);    
-    
+    freqout(pin, FNj+HNj, E3j);    
 }  
 
 void mobamba(){
