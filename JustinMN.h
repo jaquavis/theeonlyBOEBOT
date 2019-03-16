@@ -1,5 +1,5 @@
 /* Note lengths */
-#define MEASURE_TIME              2000  /* Time in ms for 1 measure (1 full note) - should be divisible by 16 */
+#define MEASURE_TIME              1000  /* Time in ms for 1 measure (1 full note) - should be divisible by 16 */
 #define FULL_NOTE                 (MEASURE_TIME)
 #define HALF_NOTE                 (MEASURE_TIME / 2)
 #define QUARTER_NOTE              (MEASURE_TIME / 4)
