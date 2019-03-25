@@ -302,6 +302,106 @@ int counter = 0;
 }
 ///////////***EMOTION***///////////
 
+////////***BONUSEMOTIONS***////////
+void LoveState()
+{
+  pause(1000);
+  high(1);
+  high(2);
+  high(3);
+  freqout(0, QN, F4);
+  low(1);
+  low(2);
+  low(3);
+  int count = 0;
+  while(1)
+  {
+    ///////SWITCH////////
+    int button = input(11);
+    print("button = %d\n", button);
+    if (button == 1)
+    {
+      return;
+    }
+    ///////SWITCH//////// 
+    
+    high(3);
+    pause(100);
+    low(3);
+    if(count > 15)
+    {
+      count = 0;
+  
+      freqout(0, QNj, B3j); 
+      freqout(0, HNj, G3j); 
+    }      
+    
+      //Slow circle
+      servo_speed(14, -50);
+      servo_speed(15, 0);
+          
+    float flex = adc_volts(0);
+    print("Sad Flex = %f V\n", flex);
+    if(flex>1.87 || flex<1.47)
+    {
+      InteractSad();
+    }      
+    pause(100);                        // Wait 1/10 s
+    count++;
+  } 
+  return;
+}  
+
+void InteractLove()
+{
+  int count = 0;
+  
+  while(count < 50)
+  {
+    high(3);
+    high(2);
+    pause(100);
+    low(3);
+    low(2);
+    ////////PING/////////
+    float i = -1;
+    i = Ping(12,13);           
+    i = i / 148;
+    print("Ping Sad %f\n", i);                      //divide the ping by 148 to get inches, or by 54 to get centimeters
+    if(i < 10)
+    {
+      count = 20;
+      int *game_cog1 = cog_run(gameover1,128);
+      int *game_cog2 = cog_run(gameover2,128);
+      int *game_cog3 = cog_run(gameover3,128);  
+  
+      //Turning the Robot 180 degrees
+      servo_speed(14, 100);
+      servo_speed(15, 100);
+      pause(1200);
+    
+      servo_speed(14, 0);
+      servo_speed(15, 0);
+      pause(100);
+  
+      servo_speed(14, -200);
+      servo_speed(15, 200);
+      pause(2000);
+      
+      servo_speed(14, 0);
+      servo_speed(15, 0);
+      pause(6000);
+      
+      cog_end(game_cog1);
+      cog_end(game_cog2);
+      cog_end(game_cog3);
+    }  
+    ////////PING///////// 
+    count++;
+  }   
+  return;
+}
+////////***BONUSEMOTIONS***////////
 
 ///////////***MISC***//////////////
 void LetsGetIt()
