@@ -325,9 +325,9 @@ void LoveState()
     }
     ///////SWITCH//////// 
     
-    high(3);
+    high(1);
     pause(100);
-    low(3);
+    low(1);
     if(count > 15)
     {
       count = 0;
@@ -339,12 +339,32 @@ void LoveState()
       //Slow circle
       servo_speed(14, -50);
       servo_speed(15, 0);
-          
+    ////////PING/////////
+    float i = -1;
+    i = Ping(12,13);           
+    i = i / 148;
+    print("Ping Love Where? %f\n", i);                      //divide the ping by 148 to get inches, or by 54 to get centimeters
+    if(i < 60)
+    {
+      servo_speed(14, -200);
+      servo_speed(15, 200);
+      float k = -1;
+      k = Ping(12,13);           
+      k = k / 148;
+      print("Ping Love Stop? %f\n", k);                      //divide the ping by 148 to get inches, or by 54 to get centimeters
+       if(k < 20)
+       {
+         servo_speed(14, 0);
+         servo_speed(15, 0);
+         pause(100);
+       }
+    }
+     ////////PING/////////      
     float flex = adc_volts(0);
-    print("Sad Flex = %f V\n", flex);
+    print("Love Flex = %f V\n", flex);
     if(flex>1.87 || flex<1.47)
     {
-      InteractSad();
+      InteractLove();
     }      
     pause(100);                        // Wait 1/10 s
     count++;
@@ -367,7 +387,7 @@ void InteractLove()
     float i = -1;
     i = Ping(12,13);           
     i = i / 148;
-    print("Ping Sad %f\n", i);                      //divide the ping by 148 to get inches, or by 54 to get centimeters
+    print("Ping Love %f\n", i);                      //divide the ping by 148 to get inches, or by 54 to get centimeters
     if(i < 10)
     {
       count = 20;
