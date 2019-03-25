@@ -104,7 +104,7 @@ void SadState()
     }      
     
       //Slow circle
-      servo_speed(14, -50);
+      servo_speed(14, -25);
       servo_speed(15, 0);
           
     float flex = adc_volts(0);
@@ -338,7 +338,7 @@ void LoveState()
     
       //Slow circle
       servo_speed(14, -50);
-      servo_speed(15, 0);
+      servo_speed(15, 50);
     ////////PING/////////
     float i = -1;
     i = Ping(12,13);           
@@ -346,18 +346,18 @@ void LoveState()
     print("Ping Love Where? %f\n", i);                      //divide the ping by 148 to get inches, or by 54 to get centimeters
     if(i < 60)
     {
-      servo_speed(14, -200);
-      servo_speed(15, 200);
-      float k = -1;
-      k = Ping(12,13);           
-      k = k / 148;
-      print("Ping Love Stop? %f\n", k);                      //divide the ping by 148 to get inches, or by 54 to get centimeters
-       if(k < 20)
-       {
-         servo_speed(14, 0);
-         servo_speed(15, 0);
-         pause(100);
-       }
+      do
+      {
+        servo_speed(14, -200);
+        servo_speed(15, 200);
+        float k = -1;
+        k = Ping(12,13);           
+        k = k / 148;
+        print("Ping Love Stop? %f\n", k);                      //divide the ping by 148 to get inches, or by 54 to get centimeters
+      } while(k < 20)
+      servo_speed(14, 0);
+      servo_speed(15, 0);
+      pause(100);
     }
      ////////PING/////////      
     float flex = adc_volts(0);
@@ -395,22 +395,10 @@ void InteractLove()
       int *game_cog2 = cog_run(gameover2,128);
       int *game_cog3 = cog_run(gameover3,128);  
   
-      //Turning the Robot 180 degrees
-      servo_speed(14, 100);
-      servo_speed(15, 100);
-      pause(1200);
-    
-      servo_speed(14, 0);
-      servo_speed(15, 0);
-      pause(100);
-  
-      servo_speed(14, -200);
-      servo_speed(15, 200);
+      //Slowly inch forward
+      servo_speed(14, -20);
+      servo_speed(15, 20);
       pause(2000);
-      
-      servo_speed(14, 0);
-      servo_speed(15, 0);
-      pause(6000);
       
       cog_end(game_cog1);
       cog_end(game_cog2);
