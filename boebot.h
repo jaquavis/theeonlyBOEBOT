@@ -13,6 +13,8 @@ void InteractScared();
 void LetsGetIt();
 void AngerState();
 void InteractAnger();
+void LoveState();
+void InteractLove();
 void Jitter();
 int Ping();
 int gameover1();
