@@ -14,6 +14,7 @@ int main()
      SadState();
      ScaredState();
      AngerState();
+     LoveState();
   }
   return 0;
 }
@@ -387,7 +388,7 @@ void InteractLove()
     float i = -1;
     i = Ping(12,13);           
     i = i / 148;
-    print("Ping Love %f\n", i);                      //divide the ping by 148 to get inches, or by 54 to get centimeters
+    print("Ping InteractLove %f\n", i);                      //divide the ping by 148 to get inches, or by 54 to get centimeters
     if(i < 10)
     {
       count = 20;
