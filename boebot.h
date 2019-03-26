@@ -1,22 +1,28 @@
-void lightshow();
-void lightshowf();
-void lightshowff();
-void backup();
-float distance_cm();
-void attack();
 void HappyState();
 void InteractHappy();
 void SadState();
 void InteractSad();
 void ScaredState();
 void InteractScared();
-void LetsGetIt();
 void AngerState();
 void InteractAnger();
 void LoveState();
 void InteractLove();
+void LethargicState();
+void InteractLethargic();
+void AnxiousState();
+void InteractAnxious();
+
+void lightshow();
+void lightshowf();
+void lightshowff();
+void backup();
+float distance_cm();
+void attack();
+void LetsGetIt();
 void Jitter();
 int Ping();
+
 int gameover1();
 int gameover2();
 int gameover3();
@@ -24,6 +30,7 @@ void mobamba();
 void mobamba1();
 void mobamba2();
 void mobamba3();
+
 
 #define MEASURE_TIME           2000  /* Time in ms for 1 measure (1 full note) - should be divisible by 16 */
   #define FULL_NOTE                 MEASURE_TIME
