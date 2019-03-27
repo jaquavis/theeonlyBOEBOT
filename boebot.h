@@ -32,17 +32,18 @@ void mobamba2();
 void mobamba3();
 
 
-#define MEASURE_TIME           2000  /* Time in ms for 1 measure (1 full note) - should be divisible by 16 */
-  #define FULL_NOTE                 MEASURE_TIME
-  #define HALF_NOTE                 MEASURE_TIME / 2
-  #define QUARTER_NOTE          MEASURE_TIME / 4
-  #define EIGHTH_NOTE             MEASURE_TIME / 8
-  #define SIXTEENTH_NOTE        MEASURE_TIME / 16
-  #define FN                        FULL_NOTE                 
-  #define HN                        HALF_NOTE                 
-  #define QN                        QUARTER_NOTE              
-  #define EN                        EIGHTH_NOTE               
-  #define SN                        SIXTEENTH_NOTE
+  #define MEASURE_TIME           2000  /* Time in ms for 1 measure (1 full note) - should be divisible by 16 */
+  #define FULL_NOTE              MEASURE_TIME
+  #define HALF_NOTE              MEASURE_TIME / 2
+  #define QUARTER_NOTE           MEASURE_TIME / 4
+  #define EIGHTH_NOTE            MEASURE_TIME / 8
+  #define SIXTEENTH_NOTE         MEASURE_TIME / 16
+
+  #define FN                     FULL_NOTE                 
+  #define HN                     HALF_NOTE                 
+  #define QN                     QUARTER_NOTE              
+  #define EN                     EIGHTH_NOTE               
+  #define SN                     SIXTEENTH_NOTE
 
   #define C0	    16.35
   #define Cs0Db0 	17.32	
