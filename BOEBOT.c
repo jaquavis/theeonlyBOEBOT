@@ -433,9 +433,9 @@ void LethargicState()
     }
     ///////SWITCH//////// 
     
-    high(1);
+    high(2);
     pause(100);
-    low(1);
+    low(2);
     if(count > 15)
     {
       count = 0;
