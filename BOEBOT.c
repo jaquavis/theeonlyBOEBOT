@@ -314,7 +314,6 @@ void LoveState()
   low(1);
   low(2);
   low(3);
-  int count = 0;
   while(1)
   {
     ///////SWITCH////////
@@ -329,17 +328,11 @@ void LoveState()
     high(1);
     pause(100);
     low(1);
-    if(count > 15)
-    {
-      count = 0;
-  
-      freqout(0, QNj, B3j); 
-      freqout(0, HNj, G3j); 
-    }      
     
       //Slow circle
       servo_speed(14, -50);
       servo_speed(15, 50);
+    
     ////////PING/////////
     float i = -1;
     i = Ping(12,13);           
@@ -355,7 +348,7 @@ void LoveState()
         k = Ping(12,13);           
         k = k / 148;
         print("Ping Love Stop? %f\n", k);                      //divide the ping by 148 to get inches, or by 54 to get centimeters
-      } while(k < 20)
+      } while(k > 20)
       servo_speed(14, 0);
       servo_speed(15, 0);
       pause(100);
@@ -368,7 +361,6 @@ void LoveState()
       InteractLove();
     }      
     pause(100);                        // Wait 1/10 s
-    count++;
   } 
   return;
 }  
