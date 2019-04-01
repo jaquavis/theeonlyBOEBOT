@@ -1,6 +1,6 @@
 /* Note lengths */
 #define MEASURE_TIMEj              1000  /* Time in ms for 1 measure (1 full note) - should be divisible by 16 */
-#define FULL_NOTEj                 (MEASURE_TIMj)
+#define FULL_NOTEj                 (MEASURE_TIMEj)
 #define HALF_NOTEj                 (MEASURE_TIMEj / 2)
 #define QUARTER_NOTEj              (MEASURE_TIMEj / 4)
 #define EIGHTH_NOTEj               (MEASURE_TIMEj / 8)
