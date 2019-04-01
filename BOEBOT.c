@@ -361,20 +361,20 @@ void InteractLove()
     print("Ping Love Where? %f\n", i);                      //divide the ping by 148 to get inches, or by 54 to get centimeters
     if(i < 70 && i > 20)
     {
-      servo_speed(14, -200);
+      servo_speed(14, -200);     //move towards object
       servo_speed(15, 200);
       pause(100);
     }
     if(i <= 20)
     {
-      servo_speed(14, 0);
+      servo_speed(14, 0);     //stop infront of object
       servo_speed(15, 0);
       pause(100);
     }
     else 
     {
       //Slow circle
-      servo_speed(14, 50);
+      servo_speed(14, 50);     //search for object
       servo_speed(15, 50);
       pause(100);
     }
