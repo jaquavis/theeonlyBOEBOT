@@ -110,7 +110,7 @@ void SadState()
           
     float flex = adc_volts(0);
     print("Sad Flex = %f V\n", flex);
-    if(flex>1.87 || flex<1.47)
+    if(flex>1.8 || flex<1.18)
     {
       InteractSad();
     }      
@@ -253,7 +253,7 @@ void AngerState()
     ///////SWITCH////////
     float flex = adc_volts(0);
     print("Mad Flex = %f V\n", flex);
-    if(flex>1.87 || flex<1.47)
+    if(flex>1.8 || flex<1.18)
     {
       cog_end(lightshow_cog);
       cog_end(mobamba_cog);
@@ -314,6 +314,8 @@ void LoveState()
   low(1);
   low(2);
   low(3);
+  servo_speed(14, 0);
+  servo_speed(15, 0);
   while(1)
   {
     ///////SWITCH////////
@@ -331,7 +333,7 @@ void LoveState()
     
     float flex = adc_volts(0);
     print("Love Flex = %f V\n", flex);
-    if(flex>1.87 || flex<1.47)
+    if(flex>1.8 || flex<1.18)
     {
       InteractLove();
     }      
@@ -344,7 +346,7 @@ void InteractLove()
 {
   int count = 0;
   
-  while(count < 50)
+  while(count < 100)
   {
     high(3);
     high(2);
@@ -357,27 +359,26 @@ void InteractLove()
     i = Ping(12,13);           
     i = i / 148;
     print("Ping Love Where? %f\n", i);                      //divide the ping by 148 to get inches, or by 54 to get centimeters
-    if(i < 50)
+    if(i < 70 && i > 20)
     {
-      do
-      {
-        float k = -1;
-        k = Ping(12,13);           
-        k = k / 148;
-        servo_speed(14, -200);
-        servo_speed(15, 200);
-        print("Ping Love Stop? %f\n", k);                      //divide the ping by 148 to get inches, or by 54 to get centimeters
-      } while(k > 20);
+      servo_speed(14, -200);
+      servo_speed(15, 200);
+      pause(100);
+    }
+    if(i <= 20)
+    {
       servo_speed(14, 0);
       servo_speed(15, 0);
       pause(100);
     }
-    else
+    else 
     {
       //Slow circle
-      servo_speed(14, -50);
+      servo_speed(14, 50);
       servo_speed(15, 50);
+      pause(100);
     }
+          
     ////////PING/////////   
     
     count++;
