@@ -361,11 +361,11 @@ void InteractLove()
     {
       do
       {
-        servo_speed(14, -200);
-        servo_speed(15, 200);
         float k = -1;
         k = Ping(12,13);           
         k = k / 148;
+        servo_speed(14, -200);
+        servo_speed(15, 200);
         print("Ping Love Stop? %f\n", k);                      //divide the ping by 148 to get inches, or by 54 to get centimeters
       } while(k > 20)
       servo_speed(14, 0);
