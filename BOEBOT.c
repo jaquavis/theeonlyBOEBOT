@@ -251,9 +251,14 @@ void AngerState()
       return;
     }   
     ///////SWITCH////////
+    
+    high(1);
+    pause(100);
+    low(1);
+    
     float flex = adc_volts(0);
     print("Mad Flex = %f V\n", flex);
-    if(flex>1.9 || flex<1.18)
+    if(flex>1.9 || flex<1.1)
     {
       cog_end(lightshow_cog);
       cog_end(mobamba_cog);
