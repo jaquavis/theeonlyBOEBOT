@@ -57,8 +57,8 @@ void HappyState()
       InteractHappy();
     }      
     pause(100);                        // Wait 1/10 s
-    }  
-    return;
+  }  
+  return;
 }  
 
 void InteractHappy()
