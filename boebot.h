@@ -13,6 +13,12 @@ void InteractLethargic();
 void AnxiousState();
 void InteractAnxious();
 
+int top();
+int bottom();
+int song1();
+int song2();
+int dance();
+
 void lightshow();
 void lightshowf();
 void lightshowff();
