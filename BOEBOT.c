@@ -449,12 +449,16 @@ void Jitter()
   
   //1 for red, 2 for green and 3 for blue
   high(3);                                  // Turn on blue LED
+  
+  //Reverse
   servo_speed(14, 20);                      // Move pin 14 motor by speed 20
   servo_speed(15, -20);                     // Move pin 15 motor by speed -20
   pause(10);                               // Pause for 0.01 seconds
   low(3);                                    // Turn off blue LED
-  servo_speed(14, -30);                      // Move pin 14 motor by speed -30
-  servo_speed(15, 30);                     // Move pin 15 motor by speed 30
+  
+  //Forward
+  servo_speed(14, -20);                      // Move pin 14 motor by speed -30
+  servo_speed(15, 20);                     // Move pin 15 motor by speed 30
   pause(10);                               // Pause for 0.01 seconds
   return;
 }   
