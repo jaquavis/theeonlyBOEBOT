@@ -41,9 +41,6 @@ void HappyState()
     }
     ///////SWITCH////////  
     
-    adc_init(21, 20, 19, 18);
-    float v1;
-    while(1){
       servo_speed(14,50);
       servo_speed(15,50);   
       //1 is red, 2 is green, 3 is blue
@@ -52,14 +49,16 @@ void HappyState()
       pause(200);        
       low(2); 
       low(1); 
-      v1 = adc_volts(0);
+      
+      float v1 = adc_volts(0);
       print("Happy Flex = %f V\n", v1);
       if(v1>1.9 || v1<1.1)
       {
         InteractHappy();
       }      
       pause(100);                               // Wait 1/10 s
-  return;    
+      return;    
+    }  
 }  
 
 void InteractHappy()
