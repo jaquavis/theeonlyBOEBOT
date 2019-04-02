@@ -52,7 +52,7 @@ void HappyState()
       
     float flex = adc_volts(0);
     print("Happy Flex = %f V\n", flex);
-    if(flex>1.7 || flex<1.1)
+    if(flex>1.6 || flex<1.1)
     {
       InteractHappy();
     }      
@@ -112,7 +112,7 @@ void SadState()
           
     float flex = adc_volts(0);
     print("Sad Flex = %f V\n", flex);
-    if(flex>1.7 || flex<1.1)
+    if(flex>1.6 || flex<1.1)
     {
       InteractSad();
     }      
@@ -197,7 +197,7 @@ void ScaredState()
          
     float flex = adc_volts(0);
     print("Scared Flex = %f V\n", flex);
-    if(flex>1.7 || flex<1.1)
+    if(flex>1.6 || flex<1.1)
     {
       InteractScared();
     }      
@@ -273,7 +273,7 @@ void AngerState()
     
     float flex = adc_volts(0);
     print("Mad Flex = %f V\n", flex);
-    if(flex>1.7 || flex<1.1)
+    if(flex>1.6 || flex<1.1)
     {
       cog_end(lightshow_cog);
       cog_end(mobamba_cog);
@@ -353,7 +353,7 @@ void LoveState()
     
     float flex = adc_volts(0);
     print("Love Flex = %f V\n", flex);
-    if(flex>1.7 || flex<1.1)
+    if(flex>1.6 || flex<1.1)
     {
       InteractLove();
     }      
