@@ -14,7 +14,7 @@ int main()
      SadState();
      ScaredState();
      AngerState();
-     LoveState();
+     //LoveState();
   }
   return 0;
 }
@@ -52,7 +52,7 @@ void HappyState()
       
     float flex = adc_volts(0);
     print("Happy Flex = %f V\n", flex);
-    if(flex>1.85 || flex<1.1)
+    if(flex>1.7 || flex<1.1)
     {
       InteractHappy();
     }      
@@ -112,7 +112,7 @@ void SadState()
           
     float flex = adc_volts(0);
     print("Sad Flex = %f V\n", flex);
-    if(flex>1.85 || flex<1.1)
+    if(flex>1.7 || flex<1.1)
     {
       InteractSad();
     }      
@@ -148,7 +148,7 @@ void InteractSad()
       //Turning the Robot 180 degrees
       servo_speed(14, 200);
       servo_speed(15, 200);
-      pause(1900);
+      pause(1500);
     
       servo_speed(14, 0);
       servo_speed(15, 0);
@@ -260,7 +260,7 @@ void AngerState()
     
     float flex = adc_volts(0);
     print("Mad Flex = %f V\n", flex);
-    if(flex>1.85 || flex<1.1)
+    if(flex>1.7 || flex<1.1)
     {
       cog_end(lightshow_cog);
       cog_end(mobamba_cog);
@@ -291,7 +291,7 @@ int counter = 0;
   int *backup_cog = cog_run(backup, 128);
   while(counter<100){
     float distance = distance_cm();
-    if (distance < 10){
+    if (distance < 20){
       counter=0;
       cog_end(lightshowf_cog);
       cog_end(backup_cog);
@@ -340,7 +340,7 @@ void LoveState()
     
     float flex = adc_volts(0);
     print("Love Flex = %f V\n", flex);
-    if(flex>1.9 || flex<1.1)
+    if(flex>1.7 || flex<1.1)
     {
       InteractLove();
     }      
