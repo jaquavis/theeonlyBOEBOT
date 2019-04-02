@@ -105,12 +105,12 @@ void SadState()
     }      
     
       //Slow circle
-      servo_speed(14, -25);
+      servo_speed(14, -80);
       servo_speed(15, 0);
           
     float flex = adc_volts(0);
     print("Sad Flex = %f V\n", flex);
-    if(flex>1.8 || flex<1.18)
+    if(flex>1.9 || flex<1.1)
     {
       InteractSad();
     }      
@@ -144,9 +144,9 @@ void InteractSad()
       int *game_cog3 = cog_run(gameover3,128);  
   
       //Turning the Robot 180 degrees
-      servo_speed(14, 100);
-      servo_speed(15, 100);
-      pause(1200);
+      servo_speed(14, 200);
+      servo_speed(15, 200);
+      pause(1900);
     
       servo_speed(14, 0);
       servo_speed(15, 0);
@@ -154,11 +154,11 @@ void InteractSad()
   
       servo_speed(14, -200);
       servo_speed(15, 200);
-      pause(2000);
+      pause(5000);
       
       servo_speed(14, 0);
       servo_speed(15, 0);
-      pause(6000);
+      pause(2000);
       
       cog_end(game_cog1);
       cog_end(game_cog2);
@@ -253,7 +253,7 @@ void AngerState()
     ///////SWITCH////////
     float flex = adc_volts(0);
     print("Mad Flex = %f V\n", flex);
-    if(flex>1.8 || flex<1.18)
+    if(flex>1.9 || flex<1.18)
     {
       cog_end(lightshow_cog);
       cog_end(mobamba_cog);
@@ -333,7 +333,7 @@ void LoveState()
     
     float flex = adc_volts(0);
     print("Love Flex = %f V\n", flex);
-    if(flex>1.8 || flex<1.18)
+    if(flex>1.9 || flex<1.1)
     {
       InteractLove();
     }      
@@ -354,6 +354,8 @@ void InteractLove()
     low(3);
     low(2);
     
+    
+    
     ////////PING/////////
     float i = -1;
     i = Ping(12,13);           
@@ -361,24 +363,27 @@ void InteractLove()
     print("Ping Love Where? %f\n", i);                      //divide the ping by 148 to get inches, or by 54 to get centimeters
     if(i < 70 && i > 20)
     {
-      servo_speed(14, -200);     //move towards object
+      servo_speed(14, -200);
       servo_speed(15, 200);
       pause(100);
     }
     if(i <= 20)
     {
-      servo_speed(14, 0);     //stop infront of object
+      servo_speed(14, 0);
       servo_speed(15, 0);
       pause(100);
     }
     else 
     {
       //Slow circle
-      servo_speed(14, 50);     //search for object
+      servo_speed(14, 50);
       servo_speed(15, 50);
       pause(100);
     }
           
+          
+      
+   
     ////////PING/////////   
     
     count++;
