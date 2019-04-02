@@ -192,32 +192,45 @@ void ScaredState()
       return;
     }
     ///////SWITCH////////
-    
-    float LDRVoltageValue;      
-                   
-    LDRVoltageValue = adc_volts(1);            // Check A/D 0
-    print("LDR Value = %f \n", LDRVoltageValue); // Display LDR voltage value
-    Jitter();                                 // Calling Jitter Function
-    
-    if (LDRVoltageValue < 3.17)                  // Checking to see LDR Value
+         
+    Jitter();      // Calling Jitter Function
+         
+    float flex = adc_volts(0);
+    print("Scared Flex = %f V\n", flex);
+    if(flex>1.7 || flex<1.1)
     {
       InteractScared();
-    }
-  }
+    }      
+    pause(100);                        // Wait 1/10 s
+  }    
   return;
 }
 
 void InteractScared()
 {
-  LetsGetIt();
+  int count = 0;
   
-  //Turning the Robot 180 degrees
-  servo_speed(14, 200);
-  pause(3000);
+  while(count < 100)
+  {
+    float LDRVoltageValue = adc_volts(1);            // Check A/D 1
+    print("LDR Value = %f \n", LDRVoltageValue); // Display LDR voltage value
+    Jitter();      // Calling Jitter Function                      
+    
+    if (LDRVoltageValue < 3.17)                 // Checking to see LDR Value
+    {
+      count = 30;                                      //count == 0
+      LetsGetIt();
+      
+      //Turning the Robot 180 degrees
+      servo_speed(14, 200);
+      pause(3000);
   
-  servo_speed(14, 0);                     // Move pin 14 motor by speed 0
-  servo_speed(15, 0);                     // Move pin 15 motor by speed 0
-  pause(1000);                            // Pause for 4 seconds
+      servo_speed(14, 0);                     // Move pin 14 motor by speed 0
+      servo_speed(15, 0);                     // Move pin 15 motor by speed 0
+      pause(1000);                            // Pause for 4 seconds
+    }
+    count++;
+  }  
   return;
 }
 
@@ -421,7 +434,73 @@ void LetsGetIt()
     
     //1 for red, 2 for green and 3 for blue
     
+void LetsGetIt()
+{
+  int LightTime = 100;
+  int FrequencyTime = 200;
+  int FrequencyLevel = 500;
+  
+  int count = 0;              // Count value          
+  int x = 100;
+  int accelRobot = 10;     //Variable that is accelerating the robot
+  int deaccelRobot = 0;    //Variable that is deaccelerating the robot
+  
+  while(x < 2000)
+  {
+    freqout(0,20,x);
+    x = x + 10;
+    
+    //Accelerating the Robot
+    servo_speed(14, accelRobot);
+    servo_speed(15, -accelRobot);
+    accelRobot = accelRobot + 2;
+  }
+  
+  deaccelRobot = accelRobot;
+                            
+  while(count < 6)
+  {
+    freqout(0, FrequencyTime, FrequencyLevel);
+    deaccelRobot = deaccelRobot / 1.3;
+    servo_speed(14, deaccelRobot);
+    servo_speed(15, -deaccelRobot); //deacellerating Robot
+    
+    //1 for red, 2 for green and 3 for blue
+    
     //Light blue color
+    high(2);
+    high(3);
+    
+    high(26);
+    low(27);
+    pause(LightTime);
+    
+    deaccelRobot = deaccelRobot / 1.3;
+    servo_speed(14, deaccelRobot);
+    servo_speed(15, -deaccelRobot); //deacellerating Robot
+    
+    high(27);
+    low(26);
+    
+    //Purple color
+    low(2);
+    high(1);
+    
+    pause(LightTime);
+    
+    deaccelRobot = deaccelRobot / 1.3;
+    servo_speed(14, deaccelRobot);
+    servo_speed(15, -deaccelRobot); //deacellerating Robot
+    
+    count++;
+    
+    LightTime = 75 + LightTime;
+    FrequencyLevel = FrequencyLevel + 100;
+    FrequencyTime = FrequencyTime + 100;
+    
+  }
+  return;
+}      //Light blue color
     high(2);
     high(3);
     
@@ -453,13 +532,18 @@ void Jitter()
   //Reverse
   servo_speed(14, 20);                      // Move pin 14 motor by speed 20
   servo_speed(15, -20);                     // Move pin 15 motor by speed -20
-  pause(10);                               // Pause for 0.01 seconds
+  pause(10);                               // Pause for 0.001 seconds
   low(3);                                    // Turn off blue LED
   
   //Forward
   servo_speed(14, -20);                      // Move pin 14 motor by speed -30
   servo_speed(15, 20);                     // Move pin 15 motor by speed 30
-  pause(10);                               // Pause for 0.01 seconds
+  pause(10);                               // Pause for 0.001 seconds
+  
+  servo_speed(14, 0);                      // Move pin 14 motor by speed -30
+  servo_speed(15, 0);                     // Move pin 15 motor by speed 30
+  
+  high(3);                                  //Turn on Blue LED
   return;
 }   
 
