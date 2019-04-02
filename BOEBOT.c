@@ -199,7 +199,7 @@ void ScaredState()
     print("LDR Value = %f \n", LDRVoltageValue); // Display LDR voltage value
     Jitter();                                 // Calling Jitter Function
     
-    if (LDRVoltageValue < 2.8)                  // Checking to see LDR Value
+    if (LDRVoltageValue < 3.17)                  // Checking to see LDR Value
     {
       InteractScared();
     }
@@ -418,11 +418,23 @@ void LetsGetIt()
   while(count < 6)
   {
     freqout(0, FrequencyTime, FrequencyLevel);
+    
+    //1 for red, 2 for green and 3 for blue
+    
+    //Light blue color
+    high(2);
+    high(3);
+    
     high(26);
     low(27);
     pause(LightTime);
     high(27);
     low(26);
+    
+    //Purple color
+    low(2);
+    high(1);
+    
     pause(LightTime);
     count++;
     LightTime = 75 + LightTime;
@@ -434,12 +446,16 @@ void LetsGetIt()
   
 void Jitter()
 {
-  servo_speed(14, 100);                      // Move pin 14 motor by speed 100
-  servo_speed(15, -100);                     // Move pin 15 motor by speed -100
-  pause(200);                               // Pause for 0.2 seconds
-  servo_speed(14, -100);                      // Move pin 14 motor by speed 100
-  servo_speed(15, 100);                     // Move pin 15 motor by speed -100
-  pause(200);                               // Pause for 0.2 seconds
+  
+  //1 for red, 2 for green and 3 for blue
+  high(3);                                  // Turn on blue LED
+  servo_speed(14, 20);                      // Move pin 14 motor by speed 20
+  servo_speed(15, -20);                     // Move pin 15 motor by speed -20
+  pause(10);                               // Pause for 0.01 seconds
+  low(3);                                    // Turn off blue LED
+  servo_speed(14, -30);                      // Move pin 14 motor by speed -30
+  servo_speed(15, 30);                     // Move pin 15 motor by speed 30
+  pause(10);                               // Pause for 0.01 seconds
   return;
 }   
 
