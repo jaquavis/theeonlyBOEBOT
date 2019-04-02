@@ -39,7 +39,7 @@ void HappyState()
     {
       return;
     }
-    ///////SWITCH////////  
+    ///////SWITCH//////// 
     
       servo_speed(14,50);
       servo_speed(15,50);   
@@ -50,15 +50,15 @@ void HappyState()
       low(2); 
       low(1); 
       
-      float v1 = adc_volts(0);
-      print("Happy Flex = %f V\n", v1);
-      if(v1>1.9 || v1<1.1)
-      {
-        InteractHappy();
-      }      
-      pause(100);                               // Wait 1/10 s
-      return;    
+    float flex = adc_volts(0);
+    print("Happy Flex = %f V\n", flex);
+    if(flex>1.9 || flex<1.1)
+    {
+      InteractHappy();
+    }      
+    pause(100);                        // Wait 1/10 s
     }  
+    return;
 }  
 
 void InteractHappy()
