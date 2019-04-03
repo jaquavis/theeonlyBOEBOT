@@ -44,15 +44,16 @@ void HappyState()
       servo_speed(14,50);
       servo_speed(15,50);   
       //1 is red, 2 is green, 3 is blue
-      high(2);
       high(1);
-      pause(200);        
+      high(2);
+      pause(200);
+      low(1);        
       low(2); 
-      low(1); 
+       
       
     float flex = adc_volts(0);
     print("Happy Flex = %f V\n", flex);
-    if(flex>1.6 || flex<1.1)
+    if(flex>1.53 || flex<1.1)
     {
       InteractHappy();
     }      
@@ -65,7 +66,7 @@ void InteractHappy()
 {
   int count = 0;
   
-  while(count < 200)
+  while(count < 100)
   {
     high(2);
     pause(100);
@@ -131,7 +132,7 @@ void SadState()
           
     float flex = adc_volts(0);
     print("Sad Flex = %f V\n", flex);
-    if(flex>1.6 || flex<1.1)
+    if(flex>1.53 || flex<1.1)
     {
       InteractSad();
     }      
@@ -210,12 +211,18 @@ void ScaredState()
       return;
     }
     ///////SWITCH////////
+    
+    high(3);
+    high(1);
+    pause(200);
+    low(3);
+    low(1);
          
     Jitter();      // Calling Jitter Function
          
     float flex = adc_volts(0);
     print("Scared Flex = %f V\n", flex);
-    if(flex>1.6 || flex<1.1)
+    if(flex>1.53 || flex<1.1)
     {
       InteractScared();
     }      
@@ -228,7 +235,7 @@ void InteractScared()
 {
   int count = 0;
   
-  while(count < 100)
+  while(count < 50)
   {
     high(2);
     pause(200);
@@ -240,7 +247,7 @@ void InteractScared()
     
     if (LDRVoltageValue < 3.17)                 // Checking to see LDR Value
     {
-      count = 30;                                      //count == 0
+      count = 15;                                      //count == 0
       LetsGetIt();
       
       //Turning the Robot 180 degrees
@@ -295,7 +302,7 @@ void AngerState()
     
     float flex = adc_volts(0);
     print("Mad Flex = %f V\n", flex);
-    if(flex>1.6 || flex<1.1)
+    if(flex>1.53 || flex<1.1)
     {
       cog_end(lightshow_cog);
       cog_end(mobamba_cog);
@@ -325,7 +332,7 @@ void InteractAnger()
   int *lightshowf_cog = cog_run(lightshowf, 128);
   int *backup_cog = cog_run(backup, 128);
   
-  while(counter<100)
+  while(counter<50)
   {
     high(2);
     pause(100);
@@ -382,7 +389,7 @@ void LoveState()
     
     float flex = adc_volts(0);
     print("Love Flex = %f V\n", flex);
-    if(flex>1.6 || flex<1.1)
+    if(flex>1.53 || flex<1.1)
     {
       InteractLove();
     }      
@@ -499,6 +506,8 @@ void LetsGetIt()
     FrequencyLevel = FrequencyLevel + 100;
     FrequencyTime = FrequencyTime + 100;
     
+    low(1);
+    low(3);
   }
   return;
 }      
@@ -507,13 +516,13 @@ void Jitter()
 {
   
   //1 for red, 2 for green and 3 for blue
-  high(3);                                  // Turn on blue LED
+  //high(3);                                  // Turn on blue LED
   
   //Reverse
   servo_speed(14, 20);                      // Move pin 14 motor by speed 20
   servo_speed(15, -20);                     // Move pin 15 motor by speed -20
   pause(10);                               // Pause for 0.001 seconds
-  low(3);                                    // Turn off blue LED
+  //low(3);                                    // Turn off blue LED
   
   //Forward
   servo_speed(14, -20);                      // Move pin 14 motor by speed -30
@@ -523,9 +532,9 @@ void Jitter()
   servo_speed(14, 0);                      // Move pin 14 motor by speed -30
   servo_speed(15, 0);                     // Move pin 15 motor by speed 30
   
-  high(3);                                  //Turn on Blue LED
+  //high(3);                                  //Turn on Blue LED
   return;
-}   
+}  
 
 int Ping(int trig, int echo)//trig is trigger pin, echo is echo pin
 {
