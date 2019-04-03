@@ -224,7 +224,7 @@ void ScaredState()
       low(1);
       InteractScared();
     }      
-    pause(100);                        // Wait 1/10 s
+    pause(10);                        // Wait 1/100s
   } 
   low(3);
   low(1);   
@@ -243,7 +243,7 @@ void InteractScared()
     print("Scared LDR Value = %f \n", LDRVoltageValue); // Display LDR voltage value
     Jitter();      // Calling Jitter Function                      
     
-    if (LDRVoltageValue < 3.13)                 // Checking to see LDR Value
+    if (LDRVoltageValue < 3.14)                 // Checking to see LDR Value
     {
       low(2);
       count = 15;                                      //count == 0
@@ -333,18 +333,23 @@ void InteractAnger()
   int *lightshowf_cog = cog_run(lightshowf, 128);
   int *backup_cog = cog_run(backup, 128);
   
-  while(counter<50)
-  { 
+  while(counter<400)
+  {
+    high(2);
+    
     float distance = distance_cm();
     if (distance < 20)
     {
-      counter=0;
+      high(1);
+      counter=50;
+      low(2);
       cog_end(lightshowf_cog);
       cog_end(backup_cog);
       attack();
       lightshowf_cog = cog_run(lightshowf, 128);
       backup_cog = cog_run(backup, 128);
-      pause(5000);
+      pause(2000);
+      low(1);
     }
     counter++;
   }
@@ -352,6 +357,7 @@ void InteractAnger()
   cog_end(backup_cog);
   servo_speed(14,0);
   servo_speed(15,0);
+  low(2);
   return;
 }
 ///////////***EMOTION***///////////
@@ -447,7 +453,7 @@ void LetsGetIt()
   
   int count = 0;              // Count value          
   int x = 100;
-  int accelRobot = 10;     //Variable that is accelerating the robot
+  int accelRobot = 0;     //Variable that is accelerating the robot
   int deaccelRobot = 0;    //Variable that is deaccelerating the robot
   
   while(x < 2000)
@@ -458,7 +464,7 @@ void LetsGetIt()
     //Accelerating the Robot
     servo_speed(14, accelRobot);
     servo_speed(15, -accelRobot);
-    accelRobot = accelRobot + 2;
+    accelRobot = accelRobot + 1;
   }
   
   deaccelRobot = accelRobot;
@@ -515,15 +521,21 @@ void Jitter()
   //1 for red, 2 for green and 3 for blue
   //high(3);                                  // Turn on blue LED
   
-  //Reverse
-  servo_speed(14, 40);                      // Move pin 14 motor by speed 20
-  servo_speed(15, -40);                     // Move pin 15 motor by speed -20
-  pause(3);                               // Pause for 0.001 seconds
+  //Turning it Left
+  servo_speed(14, 90);                      // Move pin 14 motor by speed 90
+  servo_speed(15, 90);                     // Move pin 15 motor by speed 90
+  pause(3);                               // Pause for 0.003 seconds
   //low(3);                                    // Turn off blue LED
   
-  //Forward
-  servo_speed(14, -45);                      // Move pin 14 motor by speed -30
-  servo_speed(15, 45);                     // Move pin 15 motor by speed 30
+  servo_speed(14, 0);                      // Move pin 14 motor by speed 0
+  servo_speed(15, 0);                     // Move pin 15 motor by speed 0
+  
+  pause(3);
+  
+  //Turning it Right
+  servo_speed(14, -90);                      // Move pin 14 motor by speed -90
+  servo_speed(15, -90);                     // Move pin 15 motor by speed -90
+  
   pause(3);                               // Pause for 0.001 seconds
   
   servo_speed(14, 0);                      // Move pin 14 motor by speed -30
@@ -552,16 +564,12 @@ float distance_cm(){
 
 void attack(){
   int *lightshowff_cog = cog_run(lightshowff, 128);
-  int *screamhigh_cog = cog_run(screamhigh, 128);
-  int *screamlow_cog = cog_run(screamlow, 128);
   servo_speed(14,-200);
   servo_speed(15,200);
-  pause(1000);
+  pause(500);
   servo_speed(14,0);
   servo_speed(15,0);
   cog_end(lightshowff_cog);
-  cog_end(screamhigh_cog);
-  cog_end(screamlow_cog);
   return;
 }
 
@@ -618,20 +626,6 @@ void lightshowff(){
  }
  return; 
 }
-
-void screamhigh(){
- while(1){
-  freqout(0,50,C8);
-  freqout(0,50,A7);
- }
-}
-
-void screamlow(){
- while(1){ 
-  freqout(0,50,A2);
-  freqout(0,50,C3);
-  }  
-}  
 ///////////***MISC***//////////////
 
 
