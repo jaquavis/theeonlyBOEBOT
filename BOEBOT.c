@@ -522,22 +522,22 @@ void Jitter()
   //high(3);                                  // Turn on blue LED
   
   //Reverse
-  servo_speed(14, 20);                      // Move pin 14 motor by speed 20
-  servo_speed(15, -20);                     // Move pin 15 motor by speed -20
-  pause(10);                               // Pause for 0.001 seconds
+  servo_speed(14, 40);                      // Move pin 14 motor by speed 20
+  servo_speed(15, -40);                     // Move pin 15 motor by speed -20
+  pause(3);                               // Pause for 0.001 seconds
   //low(3);                                    // Turn off blue LED
   
   //Forward
-  servo_speed(14, -20);                      // Move pin 14 motor by speed -30
-  servo_speed(15, 20);                     // Move pin 15 motor by speed 30
-  pause(10);                               // Pause for 0.001 seconds
+  servo_speed(14, -45);                      // Move pin 14 motor by speed -30
+  servo_speed(15, 45);                     // Move pin 15 motor by speed 30
+  pause(3);                               // Pause for 0.001 seconds
   
   servo_speed(14, 0);                      // Move pin 14 motor by speed -30
   servo_speed(15, 0);                     // Move pin 15 motor by speed 30
   
   //high(3);                                  //Turn on Blue LED
   return;
-}  
+}   
 
 int Ping(int trig, int echo)//trig is trigger pin, echo is echo pin
 {
