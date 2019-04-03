@@ -67,6 +67,10 @@ void InteractHappy()
   
   while(count < 200)
   {
+    high(2);
+    pause(100);
+    low(2);
+    
     float LDRVoltageValue = adc_volts(1);            // Check A/D 1
     print("Happy LDR Value = %f \n", LDRVoltageValue); // Display LDR voltage value
    
@@ -144,8 +148,9 @@ void InteractSad()
   while(count < 50)
   {
     high(2);
-    pause(100);
+    pause(200);
     low(2);
+    
     ////////PING/////////
     float i = -1;
     i = Ping(12,13);           
@@ -225,6 +230,10 @@ void InteractScared()
   
   while(count < 100)
   {
+    high(2);
+    pause(200);
+    low(2);
+    
     float LDRVoltageValue = adc_volts(1);            // Check A/D 1
     print("Scared LDR Value = %f \n", LDRVoltageValue); // Display LDR voltage value
     Jitter();      // Calling Jitter Function                      
@@ -312,12 +321,19 @@ void AngerState()
 
 void InteractAnger()
 {
-int counter = 0;
+  int counter = 0;
   int *lightshowf_cog = cog_run(lightshowf, 128);
   int *backup_cog = cog_run(backup, 128);
-  while(counter<100){
+  
+  while(counter<100)
+  {
+    high(2);
+    pause(100);
+    low(2);
+    
     float distance = distance_cm();
-    if (distance < 20){
+    if (distance < 20)
+    {
       counter=0;
       cog_end(lightshowf_cog);
       cog_end(backup_cog);
@@ -381,10 +397,8 @@ void InteractLove()
   
   while(count < 100)
   {
-    high(3);
     high(2);
-    pause(100);
-    low(3);
+    pause(200);
     low(2);
 
     ////////PING/////////
