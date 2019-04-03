@@ -63,13 +63,25 @@ void HappyState()
 
 void InteractHappy()
 {
-  int *song1_cog = cog_run(song1,128); 
-  int *song2_cog = cog_run(song2,128);
-  int *dance_cog = cog_run(dance,128);
-  pause(15000);
-  cog_end(song1_cog);
-  cog_end(song2_cog);
-  cog_end(dance_cog);
+  int count = 0;
+  
+  while(count < 200)
+  {
+    float LDRVoltageValue = adc_volts(1);            // Check A/D 1
+    print("Happy LDR Value = %f \n", LDRVoltageValue); // Display LDR voltage value
+   
+    if (LDRVoltageValue < 3.17)                 // Checking to see LDR Value
+    {
+      int *song1_cog = cog_run(song1,128); 
+      int *song2_cog = cog_run(song2,128);
+      int *dance_cog = cog_run(dance,128);
+      pause(15000);
+      cog_end(song1_cog);
+      cog_end(song2_cog);
+      cog_end(dance_cog);
+    }
+    count++;
+  }
   return;
 }
 
@@ -213,7 +225,7 @@ void InteractScared()
   while(count < 100)
   {
     float LDRVoltageValue = adc_volts(1);            // Check A/D 1
-    print("LDR Value = %f \n", LDRVoltageValue); // Display LDR voltage value
+    print("Scared LDR Value = %f \n", LDRVoltageValue); // Display LDR voltage value
     Jitter();      // Calling Jitter Function                      
     
     if (LDRVoltageValue < 3.17)                 // Checking to see LDR Value
