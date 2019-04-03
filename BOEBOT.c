@@ -11,9 +11,9 @@ int main()
   while(1)
   {
      HappyState();
-     SadState();
-     ScaredState();
      AngerState();
+     ScaredState();
+     SadState();
      //LoveState();
   }
   return 0;
