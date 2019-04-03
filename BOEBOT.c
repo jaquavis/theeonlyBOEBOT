@@ -387,37 +387,32 @@ void InteractLove()
     pause(100);
     low(3);
     low(2);
-    
-    
-    
+
     ////////PING/////////
     float i = -1;
     i = Ping(12,13);           
     i = i / 148;
     print("Ping Love Where? %f\n", i);                      //divide the ping by 148 to get inches, or by 54 to get centimeters
-    if(i < 70 && i > 20)
+    if(i < 40 && i > 20)
     {
+      count = 0;
+      servo_stop;
       servo_speed(14, -200);
       servo_speed(15, 200);
       pause(100);
     }
     if(i <= 20)
     {
+      servo_stop;
       servo_speed(14, 0);
       servo_speed(15, 0);
-      pause(100);
     }
     else 
     {
       //Slow circle
       servo_speed(14, 50);
       servo_speed(15, 50);
-      pause(100);
     }
-          
-          
-      
-   
     ////////PING/////////   
     
     count++;
