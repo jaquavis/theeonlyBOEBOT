@@ -333,23 +333,18 @@ void InteractAnger()
   int *lightshowf_cog = cog_run(lightshowf, 128);
   int *backup_cog = cog_run(backup, 128);
   
-  while(counter<400)
-  {
-    high(2);
-    
+  while(counter<50)
+  { 
     float distance = distance_cm();
     if (distance < 20)
     {
-      high(1);
-      counter=50;
-      low(2);
+      counter=0;
       cog_end(lightshowf_cog);
       cog_end(backup_cog);
       attack();
       lightshowf_cog = cog_run(lightshowf, 128);
       backup_cog = cog_run(backup, 128);
-      pause(2000);
-      low(1);
+      pause(5000);
     }
     counter++;
   }
@@ -357,7 +352,6 @@ void InteractAnger()
   cog_end(backup_cog);
   servo_speed(14,0);
   servo_speed(15,0);
-  low(2);
   return;
 }
 ///////////***EMOTION***///////////
@@ -558,12 +552,16 @@ float distance_cm(){
 
 void attack(){
   int *lightshowff_cog = cog_run(lightshowff, 128);
+  int *screamhigh_cog = cog_run(screamhigh, 128);
+  int *screamlow_cog = cog_run(screamlow, 128);
   servo_speed(14,-200);
   servo_speed(15,200);
-  pause(500);
+  pause(1000);
   servo_speed(14,0);
   servo_speed(15,0);
   cog_end(lightshowff_cog);
+  cog_end(screamhigh_cog);
+  cog_end(screamlow_cog);
   return;
 }
 
@@ -620,6 +618,20 @@ void lightshowff(){
  }
  return; 
 }
+
+void screamhigh(){
+ while(1){
+  freqout(0,50,C8);
+  freqout(0,50,A7);
+ }
+}
+
+void screamlow(){
+ while(1){ 
+  freqout(0,50,A2);
+  freqout(0,50,C3);
+  }  
+}  
 ///////////***MISC***//////////////
 
 
