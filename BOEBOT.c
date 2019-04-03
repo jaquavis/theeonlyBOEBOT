@@ -430,27 +430,6 @@ void LetsGetIt()
   
   int count = 0;              // Count value          
   int x = 100;
-  
-  while(x < 2000)
-  {
-    freqout(0,20,x);
-    x = x + 10;
-  }
-                            
-  while(count < 6)
-  {
-    freqout(0, FrequencyTime, FrequencyLevel);
-    
-    //1 for red, 2 for green and 3 for blue
-    
-void LetsGetIt()
-{
-  int LightTime = 100;
-  int FrequencyTime = 200;
-  int FrequencyLevel = 500;
-  
-  int count = 0;              // Count value          
-  int x = 100;
   int accelRobot = 10;     //Variable that is accelerating the robot
   int deaccelRobot = 0;    //Variable that is deaccelerating the robot
   
@@ -509,29 +488,8 @@ void LetsGetIt()
     
   }
   return;
-}      //Light blue color
-    high(2);
-    high(3);
-    
-    high(26);
-    low(27);
-    pause(LightTime);
-    high(27);
-    low(26);
-    
-    //Purple color
-    low(2);
-    high(1);
-    
-    pause(LightTime);
-    count++;
-    LightTime = 75 + LightTime;
-    FrequencyLevel = FrequencyLevel + 100;
-    FrequencyTime = FrequencyTime + 100;
-  }
-  return;
-}  
-  
+}      
+
 void Jitter()
 {
   
