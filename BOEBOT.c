@@ -45,8 +45,8 @@ void HappyState()
       servo_speed(15,50);   
       //1 is red, 2 is green, 3 is blue
       pwm_start(1000);
-      pwm_set(1, 0, 900);
-      pwm_set(2, 1, 50);
+      pwm_set(1, 0, 800);
+      pwm_set(2, 1, 100);
            
     float flex = adc_volts(0);
     print("Happy Flex = %f V\n", flex);
