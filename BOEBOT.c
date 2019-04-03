@@ -72,6 +72,8 @@ void InteractHappy()
    
     if (LDRVoltageValue < 3.17)                 // Checking to see LDR Value
     {
+      count = 50;
+      
       int *song1_cog = cog_run(song1,128); 
       int *song2_cog = cog_run(song2,128);
       int *dance_cog = cog_run(dance,128);
