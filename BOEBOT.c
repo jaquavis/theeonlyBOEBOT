@@ -124,7 +124,7 @@ void SadState()
     }      
     
       //Slow circle
-      servo_speed(14, -80);
+      servo_speed(14, -40);
       servo_speed(15, 0);
           
     float flex = adc_volts(0);
