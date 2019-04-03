@@ -333,7 +333,7 @@ void InteractAnger()
   int *lightshowf_cog = cog_run(lightshowf, 128);
   int *backup_cog = cog_run(backup, 128);
   
-  while(counter<400)
+  while(counter<200)
   {
     high(2);
     
