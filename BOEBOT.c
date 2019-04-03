@@ -115,9 +115,10 @@ void SadState()
     if(count > 15)
     {
       count = 0;
-  
+      high(3);
       freqout(0, QNj, B3j); 
-      freqout(0, HNj, G3j); 
+      freqout(0, HNj, G3j);
+      low(3);
     }      
     
       //Slow circle
@@ -142,10 +143,8 @@ void InteractSad()
   
   while(count < 50)
   {
-    high(3);
     high(2);
     pause(100);
-    low(3);
     low(2);
     ////////PING/////////
     float i = -1;
