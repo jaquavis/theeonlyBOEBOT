@@ -44,13 +44,10 @@ void HappyState()
       servo_speed(14,50);
       servo_speed(15,50);   
       //1 is red, 2 is green, 3 is blue
-      high(1);
-      high(2);
-      pause(200);
-      low(1);        
-      low(2); 
-       
-      
+      pwm_start(1000);
+      pwm_set(1, 0, 900);
+      pwm_set(2, 1, 50);
+           
     float flex = adc_volts(0);
     print("Happy Flex = %f V\n", flex);
     if(flex>1.53 || flex<1.1)
@@ -58,6 +55,7 @@ void HappyState()
       InteractHappy();
     }      
     pause(100);                        // Wait 1/10 s
+    pwm_stop();
   }  
   return;
 }  
@@ -66,19 +64,17 @@ void InteractHappy()
 {
   int count = 0;
   
-  while(count < 100)
+  while(count < 400)
   {
     high(2);
-    pause(100);
-    low(2);
     
     float LDRVoltageValue = adc_volts(1);            // Check A/D 1
     print("Happy LDR Value = %f \n", LDRVoltageValue); // Display LDR voltage value
    
-    if (LDRVoltageValue < 3.17)                 // Checking to see LDR Value
+    if (LDRVoltageValue < 3.13)                 // Checking to see LDR Value
     {
       count = 50;
-      
+      low(2);
       int *song1_cog = cog_run(song1,128); 
       int *song2_cog = cog_run(song2,128);
       int *dance_cog = cog_run(dance,128);
@@ -89,6 +85,7 @@ void InteractHappy()
     }
     count++;
   }
+  low(2);
   return;
 }
 
@@ -146,11 +143,9 @@ void InteractSad()
 {
   int count = 0;
   
-  while(count < 50)
+  while(count < 400)
   {
     high(2);
-    pause(200);
-    low(2);
     
     ////////PING/////////
     float i = -1;
@@ -159,12 +154,14 @@ void InteractSad()
     print("Ping Sad %f\n", i);                      //divide the ping by 148 to get inches, or by 54 to get centimeters
     if(i < 10)
     {
-      count = 20;
+      low(2);
+      count = 50;
       int *game_cog1 = cog_run(gameover1,128);
       int *game_cog2 = cog_run(gameover2,128);
       int *game_cog3 = cog_run(gameover3,128);  
   
       //Turning the Robot 180 degrees
+      high(3);
       servo_speed(14, 200);
       servo_speed(15, 200);
       pause(1500);
@@ -184,10 +181,12 @@ void InteractSad()
       cog_end(game_cog1);
       cog_end(game_cog2);
       cog_end(game_cog3);
+      low(3);
     }  
     ////////PING///////// 
     count++;
   }   
+  low(2);
   return;
 }
 
@@ -214,20 +213,21 @@ void ScaredState()
     
     high(3);
     high(1);
-    pause(200);
-    low(3);
-    low(1);
-         
+       
     Jitter();      // Calling Jitter Function
          
     float flex = adc_volts(0);
     print("Scared Flex = %f V\n", flex);
     if(flex>1.53 || flex<1.1)
     {
+      low(3);
+      low(1);
       InteractScared();
     }      
     pause(100);                        // Wait 1/10 s
-  }    
+  } 
+  low(3);
+  low(1);   
   return;
 }
 
@@ -235,18 +235,17 @@ void InteractScared()
 {
   int count = 0;
   
-  while(count < 50)
+  while(count < 100)
   {
     high(2);
-    pause(200);
-    low(2);
     
     float LDRVoltageValue = adc_volts(1);            // Check A/D 1
     print("Scared LDR Value = %f \n", LDRVoltageValue); // Display LDR voltage value
     Jitter();      // Calling Jitter Function                      
     
-    if (LDRVoltageValue < 3.17)                 // Checking to see LDR Value
+    if (LDRVoltageValue < 3.13)                 // Checking to see LDR Value
     {
+      low(2);
       count = 15;                                      //count == 0
       LetsGetIt();
       
@@ -259,7 +258,9 @@ void InteractScared()
       pause(1000);                            // Pause for 4 seconds
     }
     count++;
+    
   }  
+  low(2);
   return;
 }
 
@@ -332,22 +333,23 @@ void InteractAnger()
   int *lightshowf_cog = cog_run(lightshowf, 128);
   int *backup_cog = cog_run(backup, 128);
   
-  while(counter<50)
+  while(counter<400)
   {
     high(2);
-    pause(100);
-    low(2);
     
     float distance = distance_cm();
     if (distance < 20)
     {
-      counter=0;
+      high(1);
+      counter=50;
+      low(2);
       cog_end(lightshowf_cog);
       cog_end(backup_cog);
       attack();
       lightshowf_cog = cog_run(lightshowf, 128);
       backup_cog = cog_run(backup, 128);
       pause(2000);
+      low(1);
     }
     counter++;
   }
@@ -355,6 +357,7 @@ void InteractAnger()
   cog_end(backup_cog);
   servo_speed(14,0);
   servo_speed(15,0);
+  low(2);
   return;
 }
 ///////////***EMOTION***///////////
