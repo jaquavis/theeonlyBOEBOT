@@ -28,6 +28,8 @@ void attack();
 void LetsGetIt();
 void Jitter();
 int Ping();
+void screamhigh();
+void screamlow();
 
 int gameover1();
 int gameover2();
