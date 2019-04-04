@@ -158,7 +158,7 @@ void InteractSad()
       count = 50;
       int *game_cog1 = cog_run(gameover1,128);
       int *game_cog2 = cog_run(gameover2,128);
-      //int *game_cog3 = cog_run(gameover3,128);  
+      int *game_cog3 = cog_run(gameover3,128);  
   
       //Turning the Robot 180 degrees
       high(3);
@@ -175,7 +175,7 @@ void InteractSad()
       
       cog_end(game_cog1);
       cog_end(game_cog2);
-      //cog_end(game_cog3);
+      cog_end(game_cog3);
       low(3);
     }  
     ////////PING///////// 
