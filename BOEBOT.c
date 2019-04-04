@@ -170,13 +170,13 @@ void InteractSad()
       servo_speed(15, 0);
       pause(100);
   
-      servo_speed(14, -200);
-      servo_speed(15, 200);
-      pause(5000);
+
+
+
       
-      servo_speed(14, 0);
-      servo_speed(15, 0);
-      pause(2000);
+
+
+      pause(7000);
       
       cog_end(game_cog1);
       cog_end(game_cog2);
