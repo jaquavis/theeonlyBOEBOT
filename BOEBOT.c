@@ -744,13 +744,15 @@ void screamhigh(){
     freqout(6,50,C8);
     freqout(6,50,A7);
   }
+  return;
 }
  
-void screamhigh(){
+void screamlow(){
   while(1){
     freqout(7,50,A2);
     freqout(7,50,C3);
   }
+  return;
 }
 ///////////***MISC***//////////////
 
