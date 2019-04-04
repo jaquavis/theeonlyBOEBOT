@@ -677,7 +677,7 @@ int gameover2() //LEFT HAND
 
 int gameover3()  //EXTRA RIGHT HAND
 {
-    int pin = 7;
+    int pin = 4;
     
     freqout(pin,QNj,E4j);
     pause(QNj);
