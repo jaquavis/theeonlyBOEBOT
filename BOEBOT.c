@@ -158,7 +158,7 @@ void InteractSad()
       count = 50;
       int *game_cog1 = cog_run(gameover1,128);
       int *game_cog2 = cog_run(gameover2,128);
-      int *game_cog3 = cog_run(gameover3,128);  
+      //int *game_cog3 = cog_run(gameover3,128);  
   
       //Turning the Robot 180 degrees
       high(3);
@@ -175,7 +175,7 @@ void InteractSad()
       
       cog_end(game_cog1);
       cog_end(game_cog2);
-      cog_end(game_cog3);
+      //cog_end(game_cog3);
       low(3);
     }  
     ////////PING///////// 
@@ -291,10 +291,6 @@ void AngerState()
       return;
     }   
     ///////SWITCH////////
-    
-    high(1);
-    pause(100);
-    low(1);
     
     float flex = adc_volts(0);
     print("Mad Flex = %f V\n", flex);
@@ -559,12 +555,16 @@ float distance_cm(){
 
 void attack(){
   int *lightshowff_cog = cog_run(lightshowff, 128);
+  int *screamhigh_cog = cog_run(screamhigh, 128);
+  int *screamlow_cog = cog_run(screamlow, 128);
   servo_speed(14,-200);
   servo_speed(15,200);
   pause(500);
   servo_speed(14,0);
   servo_speed(15,0);
   cog_end(lightshowff_cog);
+  cog_end(screamhigh_cog);
+  cog_end(screamlow_cog);
   return;
 }
 
@@ -599,6 +599,10 @@ void lightshow(){
    high(5);
    pause(500);    
  }
+  low(26);
+  low(1);
+  low(27);
+  low(5);
  return;
 }
 
@@ -615,6 +619,9 @@ void lightshowf(){
    pause(200);
  }
  low(2);
+ low(26);
+ low(27);
+ low(5);
  return;
 }
 
@@ -631,7 +638,25 @@ void lightshowff(){
    high(5);
    pause(50);
  }
+ low(26);
+ low(1);
+ low(27);
+ low(5);
  return; 
+}
+
+void screamhigh(){
+  while(1){
+    freqout(6,50,C8);
+    freqout(6,50,A7);
+  }
+}
+ 
+void screamhigh(){
+  while(1){
+    freqout(7,50,A2);
+    freqout(7,50,C3);
+  }
 }
 ///////////***MISC***//////////////
 
