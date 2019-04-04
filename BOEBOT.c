@@ -170,13 +170,13 @@ void InteractSad()
       servo_speed(15, 0);
       pause(100);
   
-
-
-
+      servo_speed(14, -200);
+      servo_speed(15, 200);
+      pause(5000);
       
-
-
-      pause(7000);
+      servo_speed(14, 0);
+      servo_speed(15, 0);
+      pause(2000);
       
       cog_end(game_cog1);
       cog_end(game_cog2);
@@ -594,34 +594,46 @@ void backup(){
 void lightshow(){
  while(1){
    high(26);
+   high(1);
    low(27);
+   low(5);
    pause(500);  
    low(26);
+   low(1);
    high(27);
+   high(5);
    pause(500);    
  }
  return;
 }
 
 void lightshowf(){
+ high(2);
  while(1){
    high(26);
    low(27);
+   low(5);
    pause(200);
    low(26);
    high(27);
+   high(5);
    pause(200);
- }  
+ }
+ low(2);
  return;
 }
 
 void lightshowff(){
  while(1){
    high(26);
+   high(1);
    low(27);
+   low(5);
    pause(50);
    low(26);
+   low(1);
    high(27);
+   high(5);
    pause(50);
  }
  return; 
