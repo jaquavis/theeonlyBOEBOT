@@ -47,6 +47,7 @@ void HappyState()
       pwm_start(1000);
       pwm_set(1, 0, 800);
       pwm_set(2, 1, 100);
+      high(8);
            
     float flex = adc_volts(0);
     print("Happy Flex = %f V\n", flex);
@@ -54,7 +55,8 @@ void HappyState()
     {
       InteractHappy();
     }      
-    pause(100);                        // Wait 1/10 s
+    pause(100);// Wait 1/10 s
+    low(8);
     pwm_stop();
   }  
   return;
@@ -90,190 +92,99 @@ void InteractHappy()
 }
 
 void SadState()
-
 {
-
   pause(1000);
-
   high(1);
-
   high(2);
-
   high(3);
-
   freqout(0, QN, F4);
-
   low(1);
-
   low(2);
-
   low(3);
-
   int count = 0;
-
   while(1)
-
   {
-
     ///////SWITCH////////
-
     int button = input(11);
-
     print("button = %d\n", button);
-
     if (button == 1)
-
     {
-
       return;
-
     }
-
     ///////SWITCH//////// 
-
     
-
     high(3);
-
     pause(100);
-
     low(3);
-
     if(count > 15)
-
     {
-
       count = 0;
-
       high(3);
-
       freqout(0, QNj, B3j); 
-
       freqout(0, HNj, G3j);
-
       low(3);
-
     }      
-
     
-
       //Slow circle
-
       servo_speed(14, -40);
-
       servo_speed(15, 0);
-
           
-
     float flex = adc_volts(0);
-
     print("Sad Flex = %f V\n", flex);
-
     if(flex>1.53 || flex<1.1)
-
     {
-
       InteractSad();
-
     }      
-
     pause(100);                        // Wait 1/10 s
-
     count++;
-
   } 
-
   return;
-
 }  
 
 void InteractSad()
-
 {
-
   int count = 0;
-
   
-
-  while(count < 150)
-
+  while(count < 400)
   {
-
     high(2);
-
     
-
     ////////PING/////////
-
     float i = -1;
-
     i = Ping(12,13);           
-
     i = i / 148;
-
     print("Ping Sad %f\n", i);                      //divide the ping by 148 to get inches, or by 54 to get centimeters
-
     if(i < 10)
-
     {
-
-      count = 50;
       low(2);
-
-
+      count = 50;
       int *game_cog1 = cog_run(gameover1,128);
-
       int *game_cog2 = cog_run(gameover2,128);
-
       int *game_cog3 = cog_run(gameover3,128);  
-
   
-
       //Turning the Robot 180 degrees
-
       high(3);
-
       servo_speed(14, 200);
-
       servo_speed(15, 200);
-
       pause(1500);
-
     
-
       servo_speed(14, 0);
-
       servo_speed(15, 0);
-
       pause(100);
-
   
-
      
-
       pause(7000);
-
-     
+      
       cog_end(game_cog1);
-
       cog_end(game_cog2);
-
       cog_end(game_cog3);
-
       low(3);
-
     }  
-
     ////////PING///////// 
-
     count++;
-
   }   
-
   low(2);
-
   return;
-
 }
 
 void ScaredState()
@@ -1253,287 +1164,287 @@ int song1()
    freqout(pin,100,F6);
    high(2);
    high(1);
-   high(7);
+   high(8);
    pause(QUARTER_NOTE);
    low(2);
    low(1);
-   low(7);
+   low(8);
    freqout(pin,100,A6);
    high(2);
    high(1);
-   high(7);
+   high(8);
    pause(EIGHTH_NOTE);
    low(2);
    low(1);
-   low(7);
+   low(8);
    freqout(pin,100,C7);
    high(2);
    high(1);
-   high(7);
+   high(8);
    pause(QUARTER_NOTE);
    low(2);
    low(1);
-   low(7);
+   low(8);
    freqout(pin,100,A6);
    high(2);
    high(1);
-   high(7);
+   high(8);
    pause(QUARTER_NOTE);
    low(2);
    low(1);
-   low(7);
+   low(8);
    freqout(pin,100,F6);
    high(2);
    high(1);
-   high(7);
+   high(8);
    pause(EIGHTH_NOTE);
    low(2);
    low(1);
-   low(7);
+   low(8);
    
    freqout(pin,100,D6);
    high(2);
    high(1);
-   high(7);
+   high(8);
    pause(SIXTEENTH_NOTE);
    low(2);
    low(1);
-   low(7);
+   low(8);
    freqout(pin,100,D6);
    high(2);
    high(1);
-   high(7);
+   high(8);
    pause(SIXTEENTH_NOTE);
    low(2);
    low(1);
-   low(7);
+   low(8);
    freqout(pin,100,D6);
    high(2);
    high(1);
-   high(7);
+   high(8);
    pause(SIXTEENTH_NOTE);
    low(2);
    low(1);
-   low(7);
+   low(8);
    pause(EIGHTH_NOTE);//rest
    
    freqout(pin,100,F7); //F1
    high(2);
    high(1);
-   high(7);
+   high(8);
    pause(SIXTEENTH_NOTE);
    low(2);
    low(1);
-   low(7);
+   low(8);
    freqout(pin,100,F7); 
    high(2);
    high(1);
-   high(7);
+   high(8);
    pause(SIXTEENTH_NOTE);
    low(2);
    low(1);
-   low(7);
+   low(8);
    freqout(pin,100,F7); 
    high(2);
    high(1);
-   high(7);
+   high(8);
    pause(SIXTEENTH_NOTE);
    low(2);
    low(1);
-   low(7);
+   low(8);
    pause(EIGHTH_NOTE);//rest
    
    freqout(pin,250,C6);//slur
    freqout(pin,100,D6);
    high(2);
    high(1);
-   high(7);
+   high(8);
    pause(EIGHTH_NOTE);
    low(2);
    low(1);
-   low(7);
+   low(8);
    freqout(pin,100,F6);
    high(2);
    high(1);
-   high(7);
+   high(8);
    pause(EIGHTH_NOTE);
    low(2);
    low(1);
-   low(7);
+   low(8);
    freqout(pin,100,A6);
    high(2);
    high(1);
-   high(7);
+   high(8);
    pause(EIGHTH_NOTE);
    low(2);
    low(1);
-   low(7);
+   low(8);
    freqout(pin,100,C7);
    high(2);
    high(1);
-   high(7);
+   high(8);
    pause(EIGHTH_NOTE);
    low(2);
    low(1);
-   low(7);
+   low(8);
    freqout(pin,100,A6);
    high(2);
    high(1);
-   high(7);
+   high(8);
    pause(EIGHTH_NOTE);
    low(2);
    low(1);
-   low(7);
+   low(8);
    freqout(pin,100,F6);
    high(2);
    high(1);
-   high(7);
+   high(8);
    pause(EIGHTH_NOTE);
    low(2);
    low(1);
-   low(7);
+   low(8);
    
   //slur
    freqout(pin,500,E7);
    high(2);
    high(1);
-   high(7);
+   high(8);
    freqout(pin,250,Ds7Eb7);
    high(2);
    high(1);
-   low(7);
+   low(8);
    freqout(pin,250,D7);
    high(2);
    high(1);
-   high(7);
+   high(8);
    pause(QUARTER_NOTE);//rest
    low(2);
    low(1);
-   low(7);
+   low(8);
    
    freqout(pin,100,Gs6Ab6);
    high(2);
    high(1);
-   high(7);
+   high(8);
    pause(QUARTER_NOTE);
    low(2);
    low(1);
-   low(7);
+   low(8);
    freqout(pin,100,C7);
    high(2);
    high(1);
-   high(7);
+   high(8);
    pause(EIGHTH_NOTE);
    low(2);
    low(1);
-   low(7);
+   low(8);
    freqout(pin,100,F6);
    high(2);
    high(1);
-   high(7);
+   high(8);
    pause(QUARTER_NOTE);
    low(2);
    low(1);
-   low(7);
+   low(8);
    freqout(pin,100,C7);
    high(2);
    high(1);
-   high(7);
+   high(8);
    pause(QUARTER_NOTE);
    low(2);
    low(1);
-   low(7);
+   low(8);
    
    //try to slur
    
    freqout(pin,250,Gs6Ab6);
    high(2);
    high(1);
-   high(7);
+   high(8);
    freqout(pin,250,G6);
    high(2);
    high(1);
-   high(7);
+   high(8);
    freqout(pin,100,C7);
    high(2);
    high(1);
-   high(7);
+   high(8);
    pause(EIGHTH_NOTE);
    low(2);
    low(1);
-   low(7);
+   low(8);
    freqout(pin,100,G6);
    high(2);
    high(1);
-   high(7);
+   high(8);
    pause(EIGHTH_NOTE);
    low(2);
    low(1);
-   low(7);
+   low(8);
    freqout(pin,100,F6);
    high(2);
    high(1);
-   high(7);
+   high(8);
    pause(QUARTER_NOTE);
    low(2);
    low(1);
-   low(7);
+   low(8);
    freqout(pin,100,E6);
    high(2);
    high(1);
-   high(7);
+   high(8);
    pause(QUARTER_NOTE);
    low(2);
    low(1);
-   low(7);
+   low(8);
    freqout(pin,100,E6);
    high(2);
    high(1);
-   high(7);
+   high(8);
    pause(SIXTEENTH_NOTE);
    low(2);
    low(1);
-   low(7);
+   low(8);
    freqout(pin,100,E6);
    high(2);
    high(1);
-   high(7);
+   high(8);
    pause(SIXTEENTH_NOTE);
    low(2);
    low(1);
-   low(7);
+   low(8);
    freqout(pin,100,E6);
    high(2);
    high(1);
-   high(7);
+   high(8);
    pause(QUARTER_NOTE);//rest
    low(2);
    low(1);
-   low(7);
+   low(8);
    freqout(pin,100,E6);
    high(2);
    high(1);
-   high(7);
+   high(8);
    pause(SIXTEENTH_NOTE);
    low(2);
    low(1);
-   low(7);
+   low(8);
    freqout(pin,100,E6);
    high(2);
    high(1);
-   high(7);
+   high(8);
    pause(SIXTEENTH_NOTE);
    low(2);
    low(1);
-   low(7);
+   low(8);
    freqout(pin,100,E6);
    high(2);
    high(1);
-   high(7);
+   high(8);
    pause(1000);
    low(2);
    low(1);
-   low(7);
+   low(8);
    counter++;
   }  
   return;
