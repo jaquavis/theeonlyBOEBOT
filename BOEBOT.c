@@ -230,7 +230,7 @@ void InteractScared()
 {
   int count = 0;
   
-  while(count < 100)
+  while(count < 80)
   {
     high(2);
     
@@ -241,7 +241,7 @@ void InteractScared()
     if (LDRVoltageValue < 3.14)                 // Checking to see LDR Value
     {
       low(2);
-      count = 15;                                      //count == 0
+      count = 20;                                      //count == 20
       LetsGetIt();
       
       //Turning the Robot 180 degrees
