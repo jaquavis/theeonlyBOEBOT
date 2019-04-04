@@ -733,32 +733,6 @@ int gameover3()  //EXTRA RIGHT HAND
 void mobamba(){
   int pin = 6;
   while(1){
-  //1
-  freqout(pin,EN,G6);
-  freqout(pin,EN,F6);
-  freqout(pin,EN,E6);
-  pause(EN);
-  freqout(pin,EN,D6);
-  pause(EN);
-  freqout(pin,EN,G6);
-  freqout(pin,EN,F6);
-  //2
-  freqout(pin,EN,E6);
-  pause(EN);
-  freqout(pin,EN,D6);
-  pause(EN);
-  freqout(pin,EN,G6);
-  freqout(pin,EN,F6);
-  freqout(pin,QN,E6);
-  //3
-  freqout(pin,EN,G6);
-  freqout(pin,EN,F6);
-  freqout(pin,EN,E6);
-  pause(EN);
-  freqout(pin,EN,D6);
-  pause(EN);
-  freqout(pin,EN,G6);
-  freqout(pin,EN,F6);
   //4
   freqout(pin,EN,E6);
   pause(EN);
@@ -881,7 +855,6 @@ void mobamba(){
 void mobamba1(){
   int pin = 0;
   while(1){
-  pause(3*FN);//123
   //4
   pause(HN);
   pause(QN);
@@ -950,7 +923,6 @@ void mobamba1(){
 void mobamba2(){
   int pin = 7;
   while(1){
-    pause(3*FN);//123
   //4
   pause(HN);
   pause(QN);
@@ -1190,219 +1162,287 @@ int song1()
    freqout(pin,100,F6);
    high(2);
    high(1);
+   high(7);
    pause(QUARTER_NOTE);
    low(2);
    low(1);
+   low(7);
    freqout(pin,100,A6);
    high(2);
    high(1);
+   high(7);
    pause(EIGHTH_NOTE);
    low(2);
    low(1);
+   low(7);
    freqout(pin,100,C7);
    high(2);
    high(1);
+   high(7);
    pause(QUARTER_NOTE);
    low(2);
    low(1);
+   low(7);
    freqout(pin,100,A6);
    high(2);
    high(1);
+   high(7);
    pause(QUARTER_NOTE);
    low(2);
    low(1);
+   low(7);
    freqout(pin,100,F6);
    high(2);
    high(1);
+   high(7);
    pause(EIGHTH_NOTE);
    low(2);
    low(1);
+   low(7);
    
    freqout(pin,100,D6);
    high(2);
    high(1);
+   high(7);
    pause(SIXTEENTH_NOTE);
    low(2);
    low(1);
+   low(7);
    freqout(pin,100,D6);
    high(2);
    high(1);
+   high(7);
    pause(SIXTEENTH_NOTE);
    low(2);
    low(1);
+   low(7);
    freqout(pin,100,D6);
    high(2);
    high(1);
+   high(7);
    pause(SIXTEENTH_NOTE);
    low(2);
    low(1);
+   low(7);
    pause(EIGHTH_NOTE);//rest
    
    freqout(pin,100,F7); //F1
    high(2);
    high(1);
+   high(7);
    pause(SIXTEENTH_NOTE);
    low(2);
    low(1);
+   low(7);
    freqout(pin,100,F7); 
    high(2);
    high(1);
+   high(7);
    pause(SIXTEENTH_NOTE);
    low(2);
    low(1);
+   low(7);
    freqout(pin,100,F7); 
    high(2);
    high(1);
+   high(7);
    pause(SIXTEENTH_NOTE);
    low(2);
    low(1);
+   low(7);
    pause(EIGHTH_NOTE);//rest
    
    freqout(pin,250,C6);//slur
    freqout(pin,100,D6);
    high(2);
    high(1);
+   high(7);
    pause(EIGHTH_NOTE);
    low(2);
    low(1);
+   low(7);
    freqout(pin,100,F6);
    high(2);
    high(1);
+   high(7);
    pause(EIGHTH_NOTE);
    low(2);
    low(1);
+   low(7);
    freqout(pin,100,A6);
    high(2);
    high(1);
+   high(7);
    pause(EIGHTH_NOTE);
    low(2);
    low(1);
+   low(7);
    freqout(pin,100,C7);
    high(2);
    high(1);
+   high(7);
    pause(EIGHTH_NOTE);
    low(2);
    low(1);
+   low(7);
    freqout(pin,100,A6);
    high(2);
    high(1);
+   high(7);
    pause(EIGHTH_NOTE);
    low(2);
    low(1);
+   low(7);
    freqout(pin,100,F6);
    high(2);
    high(1);
+   high(7);
    pause(EIGHTH_NOTE);
    low(2);
    low(1);
+   low(7);
    
   //slur
    freqout(pin,500,E7);
    high(2);
    high(1);
+   high(7);
    freqout(pin,250,Ds7Eb7);
    high(2);
    high(1);
+   low(7);
    freqout(pin,250,D7);
    high(2);
    high(1);
+   high(7);
    pause(QUARTER_NOTE);//rest
    low(2);
    low(1);
+   low(7);
    
    freqout(pin,100,Gs6Ab6);
    high(2);
    high(1);
+   high(7);
    pause(QUARTER_NOTE);
    low(2);
    low(1);
+   low(7);
    freqout(pin,100,C7);
    high(2);
    high(1);
+   high(7);
    pause(EIGHTH_NOTE);
    low(2);
    low(1);
+   low(7);
    freqout(pin,100,F6);
    high(2);
    high(1);
+   high(7);
    pause(QUARTER_NOTE);
    low(2);
    low(1);
+   low(7);
    freqout(pin,100,C7);
    high(2);
    high(1);
+   high(7);
    pause(QUARTER_NOTE);
    low(2);
    low(1);
+   low(7);
    
    //try to slur
    
    freqout(pin,250,Gs6Ab6);
    high(2);
    high(1);
+   high(7);
    freqout(pin,250,G6);
    high(2);
    high(1);
+   high(7);
    freqout(pin,100,C7);
    high(2);
    high(1);
+   high(7);
    pause(EIGHTH_NOTE);
    low(2);
    low(1);
+   low(7);
    freqout(pin,100,G6);
    high(2);
    high(1);
+   high(7);
    pause(EIGHTH_NOTE);
    low(2);
    low(1);
+   low(7);
    freqout(pin,100,F6);
    high(2);
    high(1);
+   high(7);
    pause(QUARTER_NOTE);
    low(2);
    low(1);
+   low(7);
    freqout(pin,100,E6);
    high(2);
    high(1);
+   high(7);
    pause(QUARTER_NOTE);
    low(2);
    low(1);
+   low(7);
    freqout(pin,100,E6);
    high(2);
    high(1);
+   high(7);
    pause(SIXTEENTH_NOTE);
    low(2);
    low(1);
+   low(7);
    freqout(pin,100,E6);
    high(2);
    high(1);
+   high(7);
    pause(SIXTEENTH_NOTE);
    low(2);
    low(1);
+   low(7);
    freqout(pin,100,E6);
    high(2);
    high(1);
+   high(7);
    pause(QUARTER_NOTE);//rest
    low(2);
    low(1);
+   low(7);
    freqout(pin,100,E6);
    high(2);
    high(1);
+   high(7);
    pause(SIXTEENTH_NOTE);
    low(2);
    low(1);
+   low(7);
    freqout(pin,100,E6);
    high(2);
    high(1);
+   high(7);
    pause(SIXTEENTH_NOTE);
    low(2);
    low(1);
+   low(7);
    freqout(pin,100,E6);
    high(2);
    high(1);
+   high(7);
    pause(1000);
    low(2);
    low(1);
+   low(7);
    counter++;
   }  
   return;
