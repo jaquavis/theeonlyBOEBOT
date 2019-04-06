@@ -2,7 +2,7 @@
 #include "adcDCpropab.h"
 #include "servo.h"
 #include "boebot.h"
-#include "JustinMN.h"
+#include "jMN.h"
 
 int main()
 {
@@ -92,190 +92,103 @@ void InteractHappy()
 }
 
 void SadState()
-
 {
-
   pause(1000);
-
   high(1);
-
   high(2);
-
   high(3);
-
   freqout(0, QN, F4);
-
   low(1);
-
   low(2);
-
   low(3);
-
   int count = 0;
 
   while(1)
-
   {
-
     ///////SWITCH////////
-
     int button = input(11);
-
     print("button = %d\n", button);
-
     if (button == 1)
-
     {
-
       return;
-
     }
-
     ///////SWITCH//////// 
 
-    
-
     high(3);
-
     pause(100);
-
     low(3);
 
     if(count > 15)
 
     {
-
       count = 0;
-
       high(3);
-
       freqout(0, QNj, B3j); 
-
       freqout(0, HNj, G3j);
-
       low(3);
-
     }      
-
-    
 
       //Slow circle
-
       servo_speed(14, -40);
-
-      servo_speed(15, 0);
-
-          
+      servo_speed(15, 0);   
 
     float flex = adc_volts(0);
-
     print("Sad Flex = %f V\n", flex);
-
     if(flex>1.53 || flex<1.1)
-
     {
-
       InteractSad();
-
     }      
-
     pause(100);                        // Wait 1/10 s
-
     count++;
-
   } 
-
   return;
-
 }  
 
 void InteractSad()
-
 {
-
   int count = 0;
 
-  
-
   while(count < 150)
-
   {
-
     high(2);
 
-    
-
     ////////PING/////////
-
     float i = -1;
-
     i = Ping(12,13);           
-
     i = i / 148;
-
     print("Ping Sad %f\n", i);                      //divide the ping by 148 to get inches, or by 54 to get centimeters
-
     if(i < 10)
-
     {
-
       count = 50;
       low(2);
 
-
       int *game_cog1 = cog_run(gameover1,128);
-
       int *game_cog2 = cog_run(gameover2,128);
-
       int *game_cog3 = cog_run(gameover3,128);  
 
-  
-
       //Turning the Robot 180 degrees
-
       high(3);
-
       servo_speed(14, 200);
-
       servo_speed(15, 200);
-
       pause(1500);
 
-    
-
       servo_speed(14, 0);
-
       servo_speed(15, 0);
-
       pause(100);
-
-  
-
-     
 
       pause(7000);
 
-     
       cog_end(game_cog1);
-
       cog_end(game_cog2);
-
       cog_end(game_cog3);
 
       low(3);
-
     }  
-
     ////////PING///////// 
-
     count++;
-
   }   
-
   low(2);
-
   return;
-
 }
 
 
