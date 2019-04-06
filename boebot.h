@@ -8,10 +8,6 @@ void AngerState();
 void InteractAnger();
 void LoveState();
 void InteractLove();
-void LethargicState();
-void InteractLethargic();
-void AnxiousState();
-void InteractAnxious();
 
 int top();
 int bottom();
