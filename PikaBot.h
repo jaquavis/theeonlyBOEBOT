@@ -6,8 +6,6 @@ void ScaredState();
 void InteractScared();
 void AngerState();
 void InteractAnger();
-void LoveState();
-void InteractLove();
 
 int top();
 int bottom();
