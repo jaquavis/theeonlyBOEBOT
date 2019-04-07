@@ -1,8 +1,8 @@
 #include "simpletools.h"                      // Include simple tools
 #include "adcDCpropab.h"
 #include "servo.h"
-#include "boebot.h"
-#include "jMN.h"
+#include "PikaBot.h"
+#include "MusicNotes.h"
 
 int main()
 {
