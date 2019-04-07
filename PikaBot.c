@@ -14,7 +14,6 @@ int main()
      AngerState();
      ScaredState();
      SadState();
-     //LoveState();
   }
   return 0;
 }
@@ -360,89 +359,11 @@ void InteractAnger()
 }
 ///////////***EMOTION***///////////
 
-////////***BONUSEMOTIONS***////////
-void LoveState()
-{
-  pause(1000);
-  high(1);
-  high(2);
-  high(3);
-  freqout(0, QN, F4);
-  low(1);
-  low(2);
-  low(3);
-  servo_speed(14, 0);
-  servo_speed(15, 0);
-  while(1)
-  {
-    ///////SWITCH////////
-    int button = input(11);
-    print("button = %d\n", button);
-    if (button == 1)
-    {
-      return;
-    }
-    ///////SWITCH//////// 
-    
-    high(1);
-    pause(100);
-    low(1);
-    
-    float flex = adc_volts(0);
-    print("Love Flex = %f V\n", flex);
-    if(flex>1.53 || flex<1.1)
-    {
-      InteractLove();
-    }      
-    pause(100);                        // Wait 1/10 s
-  } 
-  return;
-}  
 
-void InteractLove()
-{
-  int count = 0;
-  
-  while(count < 100)
-  {
-    high(2);
-    pause(200);
-    low(2);
 
-    ////////PING/////////
-    float i = -1;
-    i = Ping(12,13);           
-    i = i / 148;
-    print("Ping Love Where? %f\n", i);                      //divide the ping by 148 to get inches, or by 54 to get centimeters
-    if(i < 40 && i > 20)
-    {
-      count = 0;
-      servo_stop;
-      servo_speed(14, -200);
-      servo_speed(15, 200);
-      pause(100);
-    }
-    if(i <= 20)
-    {
-      servo_stop;
-      servo_speed(14, 0);
-      servo_speed(15, 0);
-    }
-    else 
-    {
-      //Slow circle
-      servo_speed(14, 50);
-      servo_speed(15, 50);
-    }
-    ////////PING/////////   
-    
-    count++;
-  }   
-  return;
-}
-////////***BONUSEMOTIONS***////////
 
-///////////***MISC***//////////////
+
+///////////***MISCELLANEOUS***//////////////
 void LetsGetIt()
 {
   int LightTime = 100;
@@ -515,7 +436,6 @@ void LetsGetIt()
 
 void Jitter()
 {
-  
   //1 for red, 2 for green and 3 for blue
   //high(3);                                  // Turn on blue LED
   
@@ -667,7 +587,10 @@ void screamlow(){
   }
   return;
 }
-///////////***MISC***//////////////
+///////////***MISCELLANEOUS***//////////////
+
+
+
 
 
 ///////////***MUSIC***/////////////
